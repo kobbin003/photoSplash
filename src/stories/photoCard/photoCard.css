@@ -1,0 +1,32 @@
+.photoContainer {
+	position: relative;
+}
+.photoContainer:hover img {
+	/* filter: grayscale(20%); */
+	filter: brightness(85%);
+}
+.photoContainer:hover .onHoverDisplay {
+	/* visibility: visible; */
+	opacity: 1;
+	/* transition: visibility 2.5s ease-in-out; */
+}
+.onHoverDisplay {
+	position: absolute;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* align-items: center; */
+	/* visibility: hidden; */
+	opacity: 0;
+	transition: opacity 0.2s ease-out;
+}
+.onHoverDisplay-top {
+	display: flex;
+	justify-content: flex-end;
+}
+.onHoverDisplay-bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
