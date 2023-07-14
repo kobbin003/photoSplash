@@ -1,0 +1,63 @@
+button {
+	font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 100;
+	font-size: 16px;
+	border: 0;
+	border-radius: 0.4em;
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 1;
+}
+.button--only-icons {
+	position: relative;
+	height: 3em;
+	width: fit-content;
+	min-width: 50px;
+	padding: 8px;
+	white-space: nowrap;
+	border: 0.1px solid #f2f0f0;
+	background-color: #f2f0f0;
+	/* background-color: aqua; */
+}
+button.button--only-icons img {
+	height: 80%;
+}
+button.button--only-icons:hover {
+	background-color: white;
+	border-color: black;
+}
+button.button--icons-with-label {
+	position: relative;
+	height: 2.5em;
+	width: fit-content;
+	min-width: 180px;
+	background-color: transparent;
+	white-space: nowrap;
+	color: #767676;
+	border: 0.1px solid #767676;
+}
+.button--icons-with-label > span {
+	/* color: chartreuse; */
+	/* font-size: 60%; */
+	/* height: 100%; */
+}
+.button--icons-with-label > img {
+	padding-right: 0.5em;
+	height: 70%;
+}
+.button--icons-with-label:hover {
+	color: black;
+	border: 0.1px solid black;
+}
+.button--only-label {
+	height: 2em;
+	width: fit-content;
+	color: #767676;
+	padding: 1em 1em;
+	background-color: #eeeeee;
+}
+.button--only-label:hover {
+	color: black;
+}

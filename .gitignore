@@ -23,4 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
-src/stories
+src/stories/assets
+src/stories/containerImages
+src/stories/Layout
+src/stories/modalImage
+src/stories/photoCard
+src/stories/userProfile
