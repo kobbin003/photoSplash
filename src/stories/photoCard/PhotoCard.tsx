@@ -2,8 +2,8 @@ import { Button } from "../button/Button";
 import "./photoCard.css";
 interface PhotoCardProps {
 	imgUrl: string;
-	height: number;
-	width: number;
+	height: string;
+	width: string;
 }
 
 export const PhotoCard = ({
@@ -15,7 +15,10 @@ export const PhotoCard = ({
 	return (
 		<div
 			className="photoContainer"
-			style={{ height: `${height}px`, width: `${width}px` }}
+			style={{
+				height: `${height}`,
+				width: `${width}`,
+			}}
 			{...props}
 		>
 			<img
@@ -25,7 +28,12 @@ export const PhotoCard = ({
 			/>
 			<div
 				className="onHoverDisplay"
-				style={{ height: `${height}px`, width: `${width}px` }}
+				style={
+					{
+						// height: `${height}`,
+						// width: `${width}`,
+					}
+				}
 			>
 				<div className="onHoverDisplay-top">
 					<Button

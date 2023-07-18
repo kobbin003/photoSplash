@@ -1,5 +1,16 @@
 .photoContainer {
 	position: relative;
+	overflow: hidden;
+	/* background-size: auto; */
+}
+.photoContainer > img {
+	/* height: 100%;
+	width: 100%; */
+	/* THIS wont work because the height and width of the container is given in inline.
+	*/
+	/* height: 100%;
+	width: 100%; */
+	object-fit: cover;
 }
 .photoContainer:hover img {
 	/* filter: grayscale(20%); */
@@ -11,6 +22,8 @@
 	/* transition: visibility 2.5s ease-in-out; */
 }
 .onHoverDisplay {
+	height: 100%;
+	width: 100%;
 	position: absolute;
 	top: 0;
 	display: flex;
@@ -20,6 +33,7 @@
 	/* visibility: hidden; */
 	opacity: 0;
 	transition: opacity 0.2s ease-out;
+	/* background-color: aquamarine; */
 }
 .onHoverDisplay-top {
 	display: flex;

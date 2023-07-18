@@ -22,7 +22,9 @@ type Story = StoryObj<typeof meta>;
 export const photoCard: Story = {
 	args: {
 		imgUrl: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
-		height: 400,
-		width: 250,
+		// height: "auto-fit",
+		// width: "auto-fit",
+		height: "200px",
+		width: "250px",
 	},
 };
