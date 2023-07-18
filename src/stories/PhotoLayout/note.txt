@@ -1,0 +1,5 @@
+* it should be same for 
+/posts
+/likes
+/collections
+/explore[below the search bar]
