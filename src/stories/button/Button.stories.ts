@@ -50,7 +50,7 @@ export const iconsWithLabel: Story = {
 export const onlyIcons: Story = {
 	args: {
 		mode: "only-icons",
-		imgUrl: "/src/stories/assets/heart.svg",
+		imgUrl: "/src/stories/assets/add.svg",
 		// height: 100,
 		// width: 100,
 	},

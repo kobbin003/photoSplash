@@ -23,7 +23,12 @@ export const Button = ({
 			style={{ height: `${height}px`, width: `${width}px` }}
 			{...props}
 		>
-			{imgUrl && <img src={imgUrl} />}
+			{imgUrl && (
+				<img
+					src={imgUrl}
+					className="svg-image"
+				/>
+			)}
 			<span>{label && label}</span>
 		</button>
 	);
