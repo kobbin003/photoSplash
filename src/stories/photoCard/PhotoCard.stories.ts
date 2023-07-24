@@ -19,12 +19,17 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const photoCard: Story = {
+export const photoCardStandAlone: Story = {
+	args: {
+		imgUrl: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
+	},
+};
+export const photoCardGridItem: Story = {
 	args: {
 		imgUrl: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
 		// height: "auto-fit",
 		// width: "auto-fit",
-		height: "200px",
-		width: "250px",
+		// height: "200px",
+		// width: "250px",
 	},
 };

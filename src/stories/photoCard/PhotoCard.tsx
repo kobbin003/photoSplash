@@ -2,39 +2,17 @@ import { Button } from "../button/Button";
 import "./photoCard.css";
 interface PhotoCardProps {
 	imgUrl: string;
-	height: string;
-	width: string;
+	height?: "tall" | "medium" | "normal" | "short";
 }
 
-export const PhotoCard = ({
-	imgUrl,
-	height,
-	width,
-	...props
-}: PhotoCardProps) => {
+export const PhotoCard = ({ imgUrl, height, ...props }: PhotoCardProps) => {
 	return (
 		<div
-			className="photoContainer"
-			style={{
-				height: `${height}`,
-				width: `${width}`,
-			}}
+			className={`photoContainer photoContainer__${height}`}
 			{...props}
 		>
-			<img
-				src={imgUrl}
-				height={height}
-				width={width}
-			/>
-			<div
-				className="onHoverDisplay"
-				style={
-					{
-						// height: `${height}`,
-						// width: `${width}`,
-					}
-				}
-			>
+			<img src={imgUrl} />
+			<div className="onHoverDisplay">
 				<div className="onHoverDisplay-top">
 					<Button
 						mode="only-icons"
@@ -42,17 +20,19 @@ export const PhotoCard = ({
 					/>
 					<Button
 						mode="only-icons"
-						imgUrl="/src/stories/assets/heart.svg"
+						imgUrl="/src/stories/assets/add.svg"
 					/>
 				</div>
 				<div className="onHoverDisplay-bottom">
+					<div className="userInfo">
+						<a href="">
+							<img src="/public/vite.svg" />
+						</a>
+						<a href="">Username</a>
+					</div>
 					<Button
 						mode="only-icons"
-						imgUrl="/src/stories/assets/heart.svg"
-					/>
-					<Button
-						mode="only-icons"
-						imgUrl="/src/stories/assets/heart.svg"
+						imgUrl="/src/stories/assets/downloadArrow.svg"
 					/>
 				</div>
 			</div>
