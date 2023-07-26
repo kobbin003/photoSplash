@@ -13,34 +13,6 @@ const PhotoLayout = ({ items, height, width }: PhotoLayout) => {
 			style={{ height: `${height}`, width: `${width}` }}
 			// className="grid"
 		>
-			{/* <li className="grid__item">
-				<img
-					className="grid__image"
-					src="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-					alt=""
-				/>
-			</li>
-			<li className="grid__item grid__item--big">
-				<img
-					className="grid__image"
-					src="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-					alt=""
-				/>
-			</li>
-			<li className="grid__item grid__item--tall">
-				<img
-					className="grid__image"
-					src="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-					alt=""
-				/>
-			</li>
-			<li className="grid__item grid__item--wide">
-				<img
-					className="grid__image"
-					src="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-					alt=""
-				/>
-			</li> */}
 			<PhotoCard
 				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
 				height="short"
@@ -51,12 +23,12 @@ const PhotoLayout = ({ items, height, width }: PhotoLayout) => {
 			/>
 			<PhotoCard
 				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-				// height="200px"
+				// 	// height="200px"
 				height="medium"
 			/>
 			<PhotoCard
 				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-				// height="200px"
+				// 	// height="200px"
 				height="normal"
 			/>
 			<PhotoCard
