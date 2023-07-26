@@ -22,7 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
+.env
 src/stories/assets
 src/stories/containerImages
 src/stories/Layout

@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { useQuery } from "@tanstack/react-query";
+import {
+	EditorialPhotosType,
+	ErrorUnsplash,
+	getEditorialPhotos,
+} from "./utils/queryFunctions/getEditorialPhotos";
+import PhotoLayoutGeneric from "./stories/PhotoLayout/PhotoLayoutGeneric";
 
 function App() {
-  const [count, setCount] = useState(0)
+	const { isLoading, isError, data, error } = useQuery<
+		EditorialPhotosType[],
+		ErrorUnsplash
+	>({
+		queryKey: ["singlePhoto"],
+		queryFn: getEditorialPhotos,
+	});
+	if (isLoading) {
+		return <span>Loading...</span>;
+	}
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	if (isError) {
+		return <span>Error:{error.error[0]}</span>;
+	}
+	console.log(data);
+	return (
+		<PhotoLayoutGeneric<EditorialPhotosType>
+			items={data}
+			height="auto"
+			width="100vw"
+		/>
+	);
 }
 
-export default App
+export default App;
