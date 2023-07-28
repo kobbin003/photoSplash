@@ -1,0 +1,28 @@
+.navbar__container {
+	position: relative;
+	width: 100%;
+	height: 50px;
+	/* background-color: brown; */
+	display: flex;
+	gap: 1rem;
+	justify-content: space-between;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	align-items: center;
+}
+#logo__container {
+	/* background-color: violet; */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#login__container {
+	/* background-color: orange; */
+	width: 100%;
+	height: 100%;
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
