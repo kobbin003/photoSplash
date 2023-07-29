@@ -6,6 +6,7 @@ interface ButtonProps {
 	imgUrl?: string;
 	height?: number;
 	width?: number;
+	handleClick?: () => void;
 }
 
 export const Button = ({
@@ -14,6 +15,7 @@ export const Button = ({
 	imgUrl,
 	height,
 	width,
+	handleClick,
 	...props
 }: ButtonProps) => {
 	return (
@@ -21,6 +23,7 @@ export const Button = ({
 			type="button"
 			className={`button--${mode}`}
 			style={{ height: `${height}px`, width: `${width}px` }}
+			onClick={handleClick}
 			{...props}
 		>
 			{imgUrl && (
