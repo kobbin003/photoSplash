@@ -26,3 +26,14 @@
 	justify-content: flex-end;
 	align-items: center;
 }
+
+#profile__button {
+	height: 90%;
+	width: auto;
+	/* background-color: aqua; */
+}
+#profile__button > img {
+	height: 100%;
+	width: auto;
+	background-color: transparent;
+}
