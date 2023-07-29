@@ -67,6 +67,7 @@
 }
 .userInfo {
 	display: flex;
+	align-items: center;
 	/* background-color: chartreuse; */
 	padding: calc(16 * 0.9 * 1px);
 }
@@ -79,7 +80,7 @@
 }
 .userInfo a > img {
 	/* border: 2px solid tomato; */
-	height: 100%;
-	width: 100%;
+	/* height: 10%;
+	width: 10%; */
 	border-radius: 50%;
 }

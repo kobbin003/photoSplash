@@ -16,23 +16,27 @@ export const PhotoCard = ({ imgUrl, height, ...props }: PhotoCardProps) => {
 				<div className="onHoverDisplay-top">
 					<Button
 						mode="only-icons"
-						imgUrl="/src/stories/assets/heart.svg"
+						imgUrl="/src/stories/assets/PhotoCard/heart.svg"
 					/>
 					<Button
 						mode="only-icons"
-						imgUrl="/src/stories/assets/add.svg"
+						imgUrl="/src/stories/assets/PhotoCard/add.svg"
 					/>
 				</div>
 				<div className="onHoverDisplay-bottom">
 					<div className="userInfo">
 						<a href="">
-							<img src="/public/vite.svg" />
+							<img
+								src="/src/stories/assets/header/defaultAvatar.svg"
+								height={50}
+								width={50}
+							/>
 						</a>
 						<a href="">Username</a>
 					</div>
 					<Button
 						mode="only-icons"
-						imgUrl="/src/stories/assets/downloadArrow.svg"
+						imgUrl="/src/stories/assets/PhotoCard/downloadArrow.svg"
 					/>
 				</div>
 			</div>
