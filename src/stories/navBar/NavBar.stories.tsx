@@ -21,7 +21,7 @@ type Story = StoryObj<typeof meta>;
 
 export const NavBarLoggedOut: Story = {
 	args: {
-		mode: "loggedIn",
+		mode: "loggedOut",
 		children: (
 			<button id="profile__button">
 				<img src="/src/stories/assets/header/defaultAvatar.svg" />

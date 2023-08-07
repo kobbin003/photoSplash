@@ -2,14 +2,23 @@ import React, { ReactNode, useState } from "react";
 import { Button } from "../button/Button";
 import "./navBar.css";
 import SearchBar from "./SearchBar";
+import { authorise } from "../../utils/authorise";
+import ProfileButton from "./ProfileButton";
+// import { useNavigate } from "react-router-dom";
 interface NavbarProps {
 	mode: "loggedIn" | "loggedOut";
 	children?: ReactNode;
 }
 const NavBar = ({ mode, children }: NavbarProps) => {
-	const [logMode, setLogMode] = useState(mode);
-	const handleLogMode = () =>
-		setLogMode((prev) => (prev == "loggedIn" ? "loggedOut" : "loggedIn"));
+	// const navigate = useNavigate();
+	// const handleLogMode = () =>
+	// 	setLogMode((prev) => (prev == "loggedIn" ? "loggedOut" : "loggedIn"));
+
+	const handleClickAuthorise = () => {
+		const url = authorise();
+		// console.log(url);
+		window.location.href = url;
+	};
 	return (
 		<div className="navbar__container">
 			<div id="logo__container">
@@ -21,19 +30,14 @@ const NavBar = ({ mode, children }: NavbarProps) => {
 			</div>
 			<SearchBar />
 			<div id="login__container">
-				{logMode == "loggedIn" ? (
+				{mode == "loggedOut" ? (
 					<Button
 						mode="only-label"
 						label="Login"
-						handleClick={handleLogMode}
+						handleClick={handleClickAuthorise}
 					/>
 				) : (
-					<button id="profile__button">
-						<img
-							src="/src/stories/assets/header/defaultAvatar.svg"
-							onClick={handleLogMode}
-						/>
-					</button>
+					<ProfileButton />
 				)}
 			</div>
 		</div>
