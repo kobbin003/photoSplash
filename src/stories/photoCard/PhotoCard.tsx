@@ -15,10 +15,12 @@ export const PhotoCard = ({ imgUrl, height, ...props }: PhotoCardProps) => {
 			<div className="onHoverDisplay">
 				<div className="onHoverDisplay-top">
 					<Button
+						height={35}
 						mode="only-icons"
 						imgUrl="/src/stories/assets/PhotoCard/heart.svg"
 					/>
 					<Button
+						height={35}
 						mode="only-icons"
 						imgUrl="/src/stories/assets/PhotoCard/add.svg"
 					/>
@@ -35,6 +37,7 @@ export const PhotoCard = ({ imgUrl, height, ...props }: PhotoCardProps) => {
 						<a href="">Username</a>
 					</div>
 					<Button
+						height={35}
 						mode="only-icons"
 						imgUrl="/src/stories/assets/PhotoCard/downloadArrow.svg"
 					/>

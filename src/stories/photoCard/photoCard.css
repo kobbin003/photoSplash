@@ -1,7 +1,7 @@
 .photoContainer {
 	position: relative;
 	height: 100%;
-	width: 100%;
+	/* width: 200px; */
 	overflow: hidden;
 
 	/* background-size: auto; */
@@ -9,19 +9,19 @@
 .photoContainer__normal {
 	/* grid-column: auto/span 1; */
 	grid-row: auto/span 5;
-	border: 5px solid orange;
+	/* border: 5px solid orange; */
 }
 .photoContainer__tall {
 	grid-row: auto/span 8;
-	border: 5px solid springgreen;
+	/* border: 5px solid springgreen; */
 }
 .photoContainer__medium {
 	grid-row: auto/span 7;
-	border: 5px solid rgb(6, 0, 128);
+	/* border: 5px solid rgb(6, 0, 128); */
 }
 .photoContainer__short {
 	grid-row: auto/span 4;
-	border: 5px solid red;
+	/* border: 5px solid red; */
 }
 .photoContainer > img {
 	height: 100%;
@@ -52,28 +52,35 @@
 	/* background-color: aquamarine; */
 }
 .onHoverDisplay-top {
+	/* background-color: blue; */
 	display: flex;
 	justify-content: flex-end;
-	padding: calc(16 * 0.9 * 1px); /* convert it into rem where 1rem=16px */
+	/* convert it into rem where 1rem=16px */
+	padding: calc(16 * 0.8 * 1px);
 }
 .onHoverDisplay-top button {
-	margin: 5px;
+	/* margin: 5px; */
+	margin-left: calc(16 * 0.5 * 1px);
 }
 .onHoverDisplay-bottom {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: calc(16 * 0.9 * 1px);
+	/* background-color: aqua; */
+	padding-right: calc(16 * 0.8 * 1px);
 }
 .userInfo {
 	display: flex;
 	align-items: center;
 	/* background-color: chartreuse; */
-	padding: calc(16 * 0.9 * 1px);
+	padding: calc(16 * 0.8 * 1px);
 }
 .userInfo a {
 	color: #c7c5c5;
 	padding-right: 5px;
+}
+.userInfo a:nth-of-type(2) {
+	font-size: 0.8em;
 }
 .userInfo a:nth-of-type(2):hover {
 	color: #e1dede;
