@@ -2,17 +2,23 @@ const accessKey = import.meta.env.VITE_ACCESS_KEY;
 export type ErrorUnsplash = {
 	errors: string[];
 };
-export const getEditorialPhotos = async () => {
-	// export const getEditorialPhotos = async () => {
+export const getEditorialPhotos = async ({ queryKey }: any) => {
+	const [page, ..._] = queryKey.reverse();
+	// console.log("page", page);
+	// return;
 	try {
 		const response = await fetch(
-			`https://api.unsplash.com/photos/?client_id=${accessKey}`
+			`https://api.unsplash.com/photos/?client_id=${accessKey}&page=${page}&per_page=3`
 		);
 		if (!response.ok) {
 			const unsplashError = await response.json();
 			throw unsplashError;
 		}
-		return response.json();
+		// console.log("limit-1", response.headers.get("X-Ratelimit-Limit"));
+		// console.log("limit-2", response.headers.get("X-Ratelimit-Remaining"));
+		const remainingLimit = response.headers.get("X-Ratelimit-Remaining");
+		const photos: EditorialPhotosType[] = await response.json();
+		return { photos, remainingLimit };
 	} catch (error) {
 		console.log("fetch-error", error);
 		//* this will be consumed as data
