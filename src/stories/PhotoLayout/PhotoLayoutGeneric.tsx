@@ -1,8 +1,9 @@
-import { Urls } from "../../utils/queryFunctions/getEditorialPhotos";
+import { Urls } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
 import { PhotoCard } from "../photoCard/PhotoCard";
 import "./photoLayout.css";
 interface Extended {
 	urls: Urls;
+	id: string;
 }
 interface PhotoLayout<T extends Extended> {
 	items: T[];
@@ -17,9 +18,12 @@ const PhotoLayoutGeneric = <T extends Extended>({
 	return (
 		<div
 			className="photoLayoutGridContainer"
-			style={{ height: `${height}`, width: `${width}` }}
+			style={{
+				height: `${height}`,
+				width: `${width}`,
+			}}
 		>
-			{items.map((item) => {
+			{items.map((item, index) => {
 				type Height = "tall" | "medium" | "normal" | "short";
 				const heightArr: Height[] = ["tall", "medium", "normal", "short"];
 				const randomIndex = Math.floor(Math.random() * 4);
@@ -28,6 +32,7 @@ const PhotoLayoutGeneric = <T extends Extended>({
 					<PhotoCard
 						imgUrl={`${item.urls.regular}`}
 						height={randomHeight}
+						key={item.id + index}
 					/>
 				);
 			})}

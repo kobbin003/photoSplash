@@ -1,13 +1,17 @@
 .photoLayoutGridContainer {
+	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(1, 100vw);
+	grid-template-columns: repeat(1, calc(100vw - (100vw - 100%)));
 	grid-auto-rows: 5vw;
 	gap: 20px 20px;
+	margin-top: 60px;
 }
 @media (min-width: 776px) {
 	.photoLayoutGridContainer {
 		display: grid;
-		grid-template-columns: repeat(2, 50vw);
+		align-content: center;
+		justify-content: center;
+		grid-template-columns: repeat(2, 48vw);
 		grid-auto-rows: 5vw;
 		gap: 20px 20px;
 	}
@@ -15,22 +19,25 @@
 @media (min-width: 990px) {
 	.photoLayoutGridContainer {
 		display: grid;
-		grid-template-columns: repeat(3, 33vw);
+		/* grid-template-columns: repeat(3, calc(calc(100vw - (100vw - 100%)) / 3)); */
+		grid-template-columns: repeat(3, 31vw);
 		grid-auto-rows: 5vw;
 		gap: 20px 20px;
+		align-content: center;
+		justify-content: center;
+		/* background-color: red; */
 	}
 }
 .photoLayoutGridContainer > div {
-	/* border: 3px solid red; */
+	/* border: 3px solid red;
+	background-color: aquamarine; */
 }
-.photoLayoutFlexContainer {
-	display: flex;
-}
+
 /*----------------------------------------------------------*/
-body {
+/* body {
 	background: #3b3b3b;
-}
-@supports not (display: grid) {
+} */
+/* @supports not (display: grid) {
 	body:before {
 		content: "Your browser does not support the CSS grid spec - so that won't be super interesting! Also, I have only played with it in Firefox Nightly.. Results may vary in other browsers! :)";
 		color: #fff;
@@ -39,21 +46,18 @@ body {
 		text-align: center;
 		display: block;
 	}
-}
-.grid {
+} */
+/* .grid {
 	display: grid;
 	padding: 0;
 	margin: 0;
 	gap: 10px 10px;
 	grid-template-columns: repeat(2, 50vw);
-	/* grid-auto-rows: 50vw; */
-	/* grid-auto-flow: dense; */
 	border: 5px dotted turquoise;
 }
 @media (min-width: 26rem) {
 	.grid {
 		grid-template-columns: repeat(3, 33.333333333333336vw);
-		/* grid-auto-rows: 33.333333333333336vw; */
 		grid-auto-rows: 20vw;
 		border: 5px dotted greenyellow;
 	}
@@ -97,11 +101,10 @@ body {
 .grid__image {
 	-o-object-fit: cover;
 	object-fit: cover;
-	/* display: block; */
 	width: 100%;
 	height: 100%;
 	transition: 0.1s;
 }
 .grid__image:hover {
 	filter: sepia(100%);
-}
+} */
