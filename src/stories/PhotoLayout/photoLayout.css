@@ -4,7 +4,7 @@
 	grid-template-columns: repeat(1, calc(100vw - (100vw - 100%)));
 	grid-auto-rows: 5vw;
 	gap: 20px 20px;
-	margin-top: 60px;
+	margin-top: 110px; /* according to navBar height; 10px for space*/
 }
 @media (min-width: 776px) {
 	.photoLayoutGridContainer {
