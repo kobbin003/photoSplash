@@ -1,16 +1,24 @@
-.navbar__container {
+#container {
 	position: fixed;
 	width: 100%;
-	height: 50px;
+	height: fit-content;
 	top: 0;
+	background-color: palevioletred;
+	z-index: 1;
+}
+.navbar__container {
+	position: relative;
+	width: 100%;
+	height: 50px;
+
 	background-color: white;
+	background-color: palevioletred;
 	display: flex;
 	gap: 1rem;
 	justify-content: space-between;
 	padding-left: 1rem;
 	padding-right: 1rem;
 	align-items: center;
-	z-index: 1;
 }
 #logo__container {
 	/* background-color: violet; */

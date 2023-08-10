@@ -4,6 +4,8 @@ import "./navBar.css";
 import SearchBar from "./SearchBar";
 import { authorise } from "../../utils/authorise";
 import ProfileButton from "./ProfileButton";
+import FilterBar from "../filterBar/FilterBar";
+import { topics } from "../filterBar/topicsList";
 // import { useNavigate } from "react-router-dom";
 interface NavbarProps {
 	mode: "loggedIn" | "loggedOut";
@@ -20,26 +22,29 @@ const NavBar = ({ mode, children }: NavbarProps) => {
 		window.location.href = url;
 	};
 	return (
-		<div className="navbar__container">
-			<div id="logo__container">
-				<img
-					src="/src/stories/assets/header/logo/logo_black.svg"
-					height={30}
-					width={30}
-				/>
-			</div>
-			<SearchBar />
-			<div id="login__container">
-				{mode == "loggedOut" ? (
-					<Button
-						mode="only-label"
-						label="Login"
-						handleClick={handleClickAuthorise}
+		<div id="container">
+			<div className="navbar__container">
+				<div id="logo__container">
+					<img
+						src="/src/stories/assets/header/logo/logo_black.svg"
+						height={30}
+						width={30}
 					/>
-				) : (
-					<ProfileButton />
-				)}
+				</div>
+				<SearchBar />
+				<div id="login__container">
+					{mode == "loggedOut" ? (
+						<Button
+							mode="only-label"
+							label="Login"
+							handleClick={handleClickAuthorise}
+						/>
+					) : (
+						<ProfileButton />
+					)}
+				</div>
 			</div>
+			<FilterBar topics={topics} />
 		</div>
 	);
 };
