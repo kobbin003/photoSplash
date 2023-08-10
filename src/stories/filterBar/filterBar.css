@@ -1,0 +1,63 @@
+#filterBar {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 50px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: aqua;
+	box-sizing: border-box;
+}
+#scrollableContent {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	max-width: 100%;
+	display: flex;
+	/* background-color: tomato; */
+	max-width: 100%;
+	gap: 20px;
+	overflow-x: scroll;
+	/* padding: 0; */
+}
+#scrollableContent > button {
+	position: relative;
+	height: 100%;
+	white-space: nowrap;
+	border: none;
+	border-radius: 0;
+	/* background-color: burlywood; */
+}
+
+#filterBar > button {
+	display: block;
+	background-color: transparent;
+	white-space: nowrap;
+	border-radius: 0;
+	border: none;
+	padding: 0;
+}
+#scrollableContent::-webkit-scrollbar {
+	/* width: 5px; */
+	height: 0px;
+	visibility: hidden;
+}
+#scrollableContent::-webkit-scrollbar-track {
+	background-color: #d3d3d3;
+}
+
+#scrollableContent::-webkit-scrollbar-thumb {
+	background-color: grey;
+}
+
+#divider {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	/* background-color: coral; */
+	border-right: 1.5px solid #eeeeee;
+}
+
+#scrollableContent > button.active {
+	border-bottom: 2px solid black;
+	color: black;
+}
