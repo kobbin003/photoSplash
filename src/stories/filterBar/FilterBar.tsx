@@ -1,6 +1,5 @@
 import { FC, MouseEvent, ReactNode, useEffect, useState } from "react";
 import "./filterBar.css";
-import { Button } from "../button/Button";
 interface FilterBarArgs {
 	topics: string[];
 	// children?: ReactNode;
