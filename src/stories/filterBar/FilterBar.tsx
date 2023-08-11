@@ -8,10 +8,22 @@ interface FilterBarArgs {
 
 const FilterBar: FC<FilterBarArgs> = ({ topics }) => {
 	const [currentTopic, setCurrentTopic] = useState<string>("Editorial");
+	const [showLeftScrollArrow, setShowLeftScrollArrow] = useState(false);
 	const handleClickTopic = (e: MouseEvent<HTMLButtonElement>) => {
 		setCurrentTopic(e.currentTarget.innerText);
 	};
-
+	const handleScroll = (e: MouseEvent<HTMLDivElement>) => {
+		console.log("sccroll event", e.currentTarget.scrollLeft);
+		const scrollableContentScrolledBy = e.currentTarget.scrollLeft;
+		if (scrollableContentScrolledBy > 30) {
+			setShowLeftScrollArrow(true);
+		} else {
+			setShowLeftScrollArrow(false);
+		}
+	};
+	useEffect(() => {
+		setCurrentTopic("Editorial");
+	}, []);
 	return (
 		<div id="filterBar">
 			<button
@@ -24,12 +36,20 @@ const FilterBar: FC<FilterBarArgs> = ({ topics }) => {
 			</button>
 
 			<p id="divider"></p>
-			<Button
-				mode="only-icons"
-				imgUrl="/src/stories/assets/filterBar/leftArrow.svg"
-				height={30}
-			/>
-			<div id="scrollableContent">
+
+			<div
+				className="arrowContainer arrowContainer__left"
+				style={{ display: showLeftScrollArrow ? "flex" : "none" }}
+			>
+				<img
+					src="/src/stories/assets/filterBar/leftArrow.svg"
+					alt="go-left"
+				/>
+			</div>
+			<div
+				id="scrollableContent"
+				onScroll={handleScroll}
+			>
 				{topics.map((topic) => (
 					<button
 						key={topic}
@@ -40,11 +60,13 @@ const FilterBar: FC<FilterBarArgs> = ({ topics }) => {
 					</button>
 				))}
 			</div>
-			<Button
-				mode="only-icons"
-				imgUrl="/src/stories/assets/filterBar/rightArrow.svg"
-				height={30}
-			/>
+
+			<div className="arrowContainer arrowContainer__right">
+				<img
+					src="/src/stories/assets/filterBar/rightArrow.svg"
+					alt="go-right"
+				/>
+			</div>
 		</div>
 	);
 };
