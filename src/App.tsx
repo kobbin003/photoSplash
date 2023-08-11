@@ -1,34 +1,13 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import { useQuery } from "@tanstack/react-query";
-import {
-	EditorialPhotosType,
-	ErrorUnsplash,
-	getEditorialPhotos,
-} from "./utils/queryFunctions/getEditorialPhotos";
-import PhotoLayoutGeneric from "./stories/PhotoLayout/PhotoLayoutGeneric";
+import PhotoGallery from "./Components/PhotoGallery";
 
 function App() {
-	const { isLoading, isError, data, error } = useQuery<
-		EditorialPhotosType[],
-		ErrorUnsplash
-	>({
-		queryKey: ["singlePhoto"],
-		queryFn: getEditorialPhotos,
-	});
-	if (isLoading) {
-		return <span>Loading...</span>;
-	}
-
-	if (isError) {
-		return <span>Error:{error.error[0]}</span>;
-	}
-	console.log(data);
 	return (
-		<PhotoLayoutGeneric<EditorialPhotosType>
-			items={data}
-			height="auto"
-			width="100vw"
-		/>
+		<div className="appContainer">
+			<Outlet />
+			<PhotoGallery />
+		</div>
 	);
 }
 
