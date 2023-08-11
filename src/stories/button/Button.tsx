@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import "./button.css";
 
 interface ButtonProps {
@@ -6,7 +7,7 @@ interface ButtonProps {
 	imgUrl?: string;
 	height?: number;
 	width?: number;
-	handleClick?: () => void;
+	handleClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const Button = ({

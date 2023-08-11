@@ -12,7 +12,7 @@ button {
 }
 .button--only-icons {
 	position: relative;
-	height: 3em;
+	/* height: 3em; */
 	width: fit-content;
 	min-width: 50px;
 	padding: 8px;
@@ -23,7 +23,7 @@ button {
 	/* background-color: aqua; */
 }
 button.button--only-icons img {
-	height: 80%;
+	height: 100%;
 	filter: grayscale(90%);
 }
 button.button--only-icons:hover img {
@@ -62,6 +62,7 @@ button.button--icons-with-label {
 	color: #767676;
 	padding: 1em 1em;
 	background-color: #eeeeee;
+	white-space: nowrap;
 }
 .button--only-label:hover {
 	color: black;
