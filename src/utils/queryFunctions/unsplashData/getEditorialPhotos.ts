@@ -8,7 +8,7 @@ export const getEditorialPhotos = async ({ queryKey }: any) => {
 	// return;
 	try {
 		const response = await fetch(
-			`https://api.unsplash.com/photos/?client_id=${accessKey}&page=${page}&per_page=3`
+			`https://api.unsplash.com/photos/?client_id=${accessKey}&page=${page}&per_page=10`
 		);
 		if (!response.ok) {
 			const unsplashError = await response.json();
