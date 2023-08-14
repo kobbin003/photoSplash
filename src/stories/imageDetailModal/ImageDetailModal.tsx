@@ -7,7 +7,7 @@ interface ImageDetailModalArgs {
 
 const ImageDetailModal: FC<ImageDetailModalArgs> = ({}) => {
 	return (
-		<div id="modalContainer">
+		<div id="modalContent">
 			<div id="header">
 				<div className="userInfo">
 					<a href="">
