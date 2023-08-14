@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { Children, MouseEvent, ReactNode } from "react";
 import "./button.css";
 
 interface ButtonProps {
@@ -8,6 +8,7 @@ interface ButtonProps {
 	height?: number;
 	width?: number;
 	handleClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+	children?: ReactNode;
 }
 
 export const Button = ({
@@ -17,6 +18,7 @@ export const Button = ({
 	height,
 	width,
 	handleClick,
+	children,
 	...props
 }: ButtonProps) => {
 	return (
@@ -33,7 +35,8 @@ export const Button = ({
 					className="svg-image"
 				/>
 			)}
-			<span>{label && label}</span>
+			{label && <span>{label}</span>}
+			{children}
 		</button>
 	);
 };
