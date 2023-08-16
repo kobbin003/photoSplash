@@ -6,10 +6,15 @@ interface PhotoCardProps {
 }
 
 export const PhotoCard = ({ imgUrl, height, ...props }: PhotoCardProps) => {
+	const handleOnClick = () => {
+		window.dispatchEvent(new Event("showModal"));
+	};
 	return (
 		<div
 			className={`photoContainer photoContainer__${height}`}
 			{...props}
+			onClick={handleOnClick}
+			style={{ cursor: "zoom-in" }}
 		>
 			<img src={imgUrl} />
 			<div className="onHoverDisplay">
