@@ -4,15 +4,11 @@ import ImageDetailModal from "../../stories/imageDetailModal/ImageDetailModal";
 const ModalContainer = () => {
 	const [showModal, setShowModal] = useState(false);
 	const handleCloseModal = () => {
-		console.log("close modal");
 		document.body.style.overflow = "scroll";
-		const modalEl = document.getElementById("modalContainer");
-
 		setShowModal(false);
 	};
 	useEffect(() => {
 		const handleShowModal = () => {
-			console.log("show modal");
 			document.body.style.overflow = "hidden";
 			setShowModal(true);
 		};
@@ -21,13 +17,45 @@ const ModalContainer = () => {
 	}, []);
 	return (
 		<div
-			id="modalContainer"
-			style={{ display: showModal ? "flex" : "none" }}
+			style={{
+				display: showModal ? "flex" : "none",
+				justifyContent: "center",
+			}}
 		>
-			{/* <button onClick={handleCloseModal}>XXXXXXXXXXX</button> */}
-			<div className="blackSpace">&lt;</div>
-			<ImageDetailModal />
-			<div className="blackSpace">&gt;</div>
+			/** layer-1: the black curtain */
+			<div id="blackCurtain"></div>
+			/** layer-2: the ImageDetailModal */
+			<div id="modalContainer">
+				<ImageDetailModal />
+			</div>
+			/** layer-3: the nav & close buttons */
+			<div className="blackSpace blackSpace__left">
+				<button
+					id="close"
+					onClick={handleCloseModal}
+				>
+					<img
+						src="/src/assets/close.svg"
+						alt="close"
+						height={25}
+						width={25}
+					/>
+				</button>
+				<button>
+					<img
+						src="/src/stories/assets/imageModal/leftArrow.svg"
+						alt="left"
+					/>
+				</button>
+			</div>
+			<div className="blackSpace blackSpace__right">
+				<button>
+					<img
+						src="/src/stories/assets/imageModal/rightArrow.svg"
+						alt="right"
+					/>
+				</button>
+			</div>
 		</div>
 	);
 };
