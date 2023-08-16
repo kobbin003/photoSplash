@@ -1,14 +1,13 @@
 #modalContent {
 	position: relative;
-	width: calc(calc(80 / 100) * 100vw);
 	/* keeping width: 80% makes it "unaligned with the width of #header */
+	/* keep the width of #modalContent & #header same */
+	width: calc(calc(80 / 100) * 100vw);
 	background-color: white;
 	height: fit-content;
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
 	align-items: center;
-	/* overflow: hidden; */
 	@media (max-width: 990px) {
 		/* background-color: darkorange; */
 		width: 100vw;
@@ -18,7 +17,6 @@
 	position: fixed;
 	width: 100%;
 	width: calc(calc(80 / 100) * 100vw);
-	/* height: 80px; */
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
