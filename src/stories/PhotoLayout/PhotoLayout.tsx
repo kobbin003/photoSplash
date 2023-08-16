@@ -1,44 +1,38 @@
+import {
+	EditorialPhotosType,
+	Urls,
+} from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
 import { PhotoCard } from "../photoCard/PhotoCard";
 import "./photoLayout.css";
+
 interface PhotoLayout {
-	items: {}[];
+	items: EditorialPhotosType[];
 	height: string;
 	width: string;
 }
-// const PhotoLayout = () => {
 const PhotoLayout = ({ items, height, width }: PhotoLayout) => {
 	return (
 		<div
 			className="photoLayoutGridContainer"
-			style={{ height: `${height}`, width: `${width}` }}
-			// className="grid"
+			style={{
+				height: `${height}`,
+				width: `${width}`,
+			}}
 		>
-			<PhotoCard
-				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-				height="short"
-			/>
-			<PhotoCard
-				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-				height="tall"
-			/>
-			<PhotoCard
-				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-				// 	// height="200px"
-				height="medium"
-			/>
-			<PhotoCard
-				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-				// 	// height="200px"
-				height="normal"
-			/>
-			<PhotoCard
-				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-				height="short"
-			/>
-			<PhotoCard
-				imgUrl="/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg"
-				height="medium"
-			/>
+			{items.map((item, index) => {
+				type Height = "tall" | "medium" | "normal" | "short";
+				const heightArr: Height[] = ["tall", "medium", "normal", "short"];
+				const randomIndex = Math.floor(Math.random() * 4);
+				const randomHeight: Height = heightArr[randomIndex];
+				return (
+					<PhotoCard
+						imgUrl={`${item.urls.regular}`}
+						height={randomHeight}
+						key={item.id + index}
+						photoData={item}
+					/>
+				);
+			})}
 		</div>
 	);
 };

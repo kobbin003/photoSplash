@@ -1,4 +1,7 @@
-import { Urls } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
+import {
+	EditorialPhotosType,
+	Urls,
+} from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
 import { PhotoCard } from "../photoCard/PhotoCard";
 import "./photoLayout.css";
 interface Extended {
@@ -29,11 +32,14 @@ const PhotoLayoutGeneric = <T extends Extended>({
 				const randomIndex = Math.floor(Math.random() * 4);
 				const randomHeight: Height = heightArr[randomIndex];
 				return (
-					<PhotoCard
+					<>
+						{/* <PhotoCard
 						imgUrl={`${item.urls.regular}`}
 						height={randomHeight}
 						key={item.id + index}
-					/>
+						photoData={item}
+					/> */}
+					</>
 				);
 			})}
 		</div>

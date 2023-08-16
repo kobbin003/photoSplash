@@ -6,11 +6,14 @@ import {
 } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
 import PhotoLayoutGeneric from "../../stories/PhotoLayout/PhotoLayoutGeneric";
 import { useEffect, useRef, useState } from "react";
+import { usePhotoStore } from "../../store/store";
+import PhotoLayout from "../../stories/PhotoLayout/PhotoLayout";
 
 const conditionToShowErrorMessage = (remainingLimit: string) => {
 	return parseInt(remainingLimit, 10) < parseInt("2", 10);
 };
 const PhotoGallery = () => {
+	const { setAllPhotos } = usePhotoStore();
 	const [page, setPage] = useState(1);
 	const [mergedData, setMergedData] = useState<EditorialPhotosType[]>([]);
 	const [pageIncremented, setPageIncremented] = useState(false); // to increment page one at a time
@@ -42,6 +45,7 @@ const PhotoGallery = () => {
 		console.log("rerender", page, data?.remainingLimit, window.innerHeight);
 		if (!isLoading && !isError && data) {
 			setMergedData((prevData) => [...prevData, ...data.photos]);
+
 			if (scrolledYRef.current) {
 				window.scrollTo(0, scrolledYRef.current);
 				//! ISSUES:
@@ -89,7 +93,9 @@ const PhotoGallery = () => {
 			window.removeEventListener("scroll", scrollListener);
 		};
 	}, []);
-
+	useEffect(() => {
+		setAllPhotos(mergedData);
+	}, [mergedData]);
 	if (isLoading) {
 		return <span>Loading...</span>;
 	}
@@ -121,7 +127,7 @@ const PhotoGallery = () => {
 						</p>
 					)}
 			</>
-			<PhotoLayoutGeneric<EditorialPhotosType>
+			<PhotoLayout
 				items={mergedData}
 				height="auto"
 				width="100%"
