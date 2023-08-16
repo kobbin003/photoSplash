@@ -1,7 +1,4 @@
-import {
-	EditorialPhotosType,
-	Urls,
-} from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
+import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
 import { PhotoCard } from "../photoCard/PhotoCard";
 import "./photoLayout.css";
 

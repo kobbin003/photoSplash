@@ -4,7 +4,6 @@ import {
 	ErrorUnsplash,
 	getEditorialPhotos,
 } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
-import PhotoLayoutGeneric from "../../stories/PhotoLayout/PhotoLayoutGeneric";
 import { useEffect, useRef, useState } from "react";
 import { usePhotoStore } from "../../store/store";
 import PhotoLayout from "../../stories/PhotoLayout/PhotoLayout";
@@ -68,7 +67,7 @@ const PhotoGallery = () => {
 		//go to top on reMount
 		window.scrollTo(0, 0);
 		// scroll listener
-		const scrollListener = (e: any) => {
+		const scrollListener = () => {
 			// Get the viewport height
 			const viewportHeight = window.innerHeight;
 
