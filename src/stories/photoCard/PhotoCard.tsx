@@ -1,13 +1,25 @@
+import { usePhotoStore } from "../../store/store";
+import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import { Button } from "../button/Button";
 import "./photoCard.css";
-interface PhotoCardProps {
+interface PhotoCardProps<T> {
 	imgUrl: string;
 	height?: "tall" | "medium" | "normal" | "short";
+	photoData: T;
 }
 
-export const PhotoCard = ({ imgUrl, height, ...props }: PhotoCardProps) => {
+export const PhotoCard = <T extends EditorialPhotosType>({
+	imgUrl,
+	height,
+	photoData,
+	...props
+}: PhotoCardProps<T>) => {
+	const { setCurrentPhoto } = usePhotoStore();
+
 	const handleOnClick = () => {
 		window.dispatchEvent(new Event("showModal"));
+		console.log("item clicked", photoData);
+		setCurrentPhoto(photoData);
 	};
 	return (
 		<div
