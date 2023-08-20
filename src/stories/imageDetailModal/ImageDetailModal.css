@@ -144,9 +144,18 @@
 		display: flex;
 		align-items: center;
 		gap: 1em;
+		padding: 0.2em;
 		> p {
+			position: relative;
+			left: -0.8em;
 			color: #767676;
 			font-size: 0.8rem;
+			& > a {
+				color: inherit;
+			}
+			& > a:hover {
+				color: black;
+			}
 		}
 	}
 }
