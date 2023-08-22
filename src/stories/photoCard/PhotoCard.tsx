@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { usePhotoStore } from "../../store/store";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import { Button } from "../button/Button";
@@ -44,14 +45,15 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 				</div>
 				<div className="onHoverDisplay-bottom">
 					<div className="userInfo">
-						<a href="">
+						<Link to={""}>
 							<img
-								src="/src/stories/assets/header/defaultAvatar.svg"
-								height={50}
-								width={50}
+								src={
+									photoData.user.profile_image.medium ||
+									"/src/stories/assets/header/defaultAvatar.svg"
+								}
 							/>
-						</a>
-						<a href="">Username</a>
+						</Link>
+						<Link to="">{photoData.user.name}</Link>
 					</div>
 					<Button
 						height={35}
