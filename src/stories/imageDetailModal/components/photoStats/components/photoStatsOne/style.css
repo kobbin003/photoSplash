@@ -1,0 +1,31 @@
+#row-1 {
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1em;
+	& button {
+		padding: 0 0.5em;
+		min-width: 0px;
+		background-color: transparent;
+		border: 0.1px solid #7676767c;
+		margin-right: 0.7em;
+	}
+	& button:hover {
+		border: 0.1px solid black;
+	}
+	& button:nth-of-type(3) {
+		padding: 0;
+	}
+	> div {
+		padding-left: 1em;
+		> p:nth-of-type(1) {
+			color: #767676;
+			font-size: 16px;
+		}
+	}
+	> div:nth-of-type(4) {
+		display: flex;
+	}
+}
