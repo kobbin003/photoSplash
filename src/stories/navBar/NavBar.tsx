@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { Button } from "../button/Button";
 import "./navBar.css";
 import { authorise } from "../../utils/authorise";
@@ -11,7 +11,7 @@ interface NavbarProps {
 	mode: "loggedIn" | "loggedOut";
 	children?: ReactNode;
 }
-const NavBar = ({ mode, children }: NavbarProps) => {
+const NavBar = ({ mode }: NavbarProps) => {
 	const handleClickAuthorise = () => {
 		const url = authorise();
 		// console.log(url);
