@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useEffect, useState } from "react";
+import { FC, MouseEvent, useEffect, useRef, useState } from "react";
 import "./filterBar.css";
 interface FilterBarArgs {
 	topics: string[];
@@ -8,11 +8,13 @@ interface FilterBarArgs {
 const FilterBar: FC<FilterBarArgs> = ({ topics }) => {
 	const [currentTopic, setCurrentTopic] = useState<string>("Editorial");
 	const [showLeftScrollArrow, setShowLeftScrollArrow] = useState(false);
+	const [showRightScrollArrow, setShowRightScrollArrow] = useState(true);
+	const scrollableContentRef = useRef<HTMLDivElement>(null);
 	const handleClickTopic = (e: MouseEvent<HTMLButtonElement>) => {
 		setCurrentTopic(e.currentTarget.innerText);
 	};
 	const handleScroll = (e: MouseEvent<HTMLDivElement>) => {
-		console.log("sccroll event", e.currentTarget.scrollLeft);
+		// console.log("sccroll event", e.currentTarget.scrollLeft);
 		const scrollableContentScrolledBy = e.currentTarget.scrollLeft;
 		if (scrollableContentScrolledBy > 30) {
 			setShowLeftScrollArrow(true);
@@ -20,8 +22,34 @@ const FilterBar: FC<FilterBarArgs> = ({ topics }) => {
 			setShowLeftScrollArrow(false);
 		}
 	};
+	const handleScrollLeft = () => {
+		console.log("scroll left click");
+		const el = scrollableContentRef.current as HTMLElement;
+		el.scrollLeft -= 300;
+	};
+	const handleScrollRight = () => {
+		const el = scrollableContentRef.current as HTMLElement;
+		el.scrollLeft += 300;
+	};
 	useEffect(() => {
 		setCurrentTopic("Editorial");
+	}, []);
+	useEffect(() => {
+		const el = scrollableContentRef.current as HTMLElement;
+		el.addEventListener("scroll", () => {
+			// console.log("scroll....", el.scrollWidth, el.scrollLeft, el.clientWidth);
+			const elTotalWidth = el.scrollWidth;
+			const elVisibleWidth = el.clientWidth;
+			const elAmountScrolledLeft = el.scrollLeft;
+			if (elVisibleWidth + elAmountScrolledLeft > elTotalWidth - 10) {
+				console.log("hide right");
+				setShowRightScrollArrow(false);
+			}
+			if (elVisibleWidth + elAmountScrolledLeft < elTotalWidth - 10) {
+				console.log("show right");
+				setShowRightScrollArrow(true);
+			}
+		});
 	}, []);
 	return (
 		<div id="filterBar">
@@ -36,7 +64,8 @@ const FilterBar: FC<FilterBarArgs> = ({ topics }) => {
 
 			<p id="divider"></p>
 
-			<div
+			<button
+				onClick={handleScrollLeft}
 				className="arrowContainer arrowContainer__left"
 				style={{ display: showLeftScrollArrow ? "flex" : "none" }}
 			>
@@ -44,10 +73,11 @@ const FilterBar: FC<FilterBarArgs> = ({ topics }) => {
 					src="/src/stories/assets/filterBar/leftArrow.svg"
 					alt="go-left"
 				/>
-			</div>
+			</button>
 			<div
 				id="scrollableContent"
 				onScroll={handleScroll}
+				ref={scrollableContentRef}
 			>
 				{topics.map((topic) => (
 					<button
@@ -60,12 +90,16 @@ const FilterBar: FC<FilterBarArgs> = ({ topics }) => {
 				))}
 			</div>
 
-			<div className="arrowContainer arrowContainer__right">
+			<button
+				className="arrowContainer arrowContainer__right"
+				onClick={handleScrollRight}
+				style={{ display: showRightScrollArrow ? "flex" : "none" }}
+			>
 				<img
 					src="/src/stories/assets/filterBar/rightArrow.svg"
 					alt="go-right"
 				/>
-			</div>
+			</button>
 		</div>
 	);
 };
