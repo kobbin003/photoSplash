@@ -1,3 +1,6 @@
+export type ErrorUnsplash = {
+	errors: string[];
+};
 export interface PhotoStats {
 	id: string;
 	downloads: Downloads;
