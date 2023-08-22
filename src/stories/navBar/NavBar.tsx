@@ -1,21 +1,17 @@
 import React, { ReactNode, useState } from "react";
 import { Button } from "../button/Button";
 import "./navBar.css";
-import SearchBar from "./SearchBar";
 import { authorise } from "../../utils/authorise";
-import ProfileButton from "./ProfileButton";
+import ProfileButton from "./component/profileButton/ProfileButton";
 import FilterBar from "../filterBar/FilterBar";
 import { topics } from "../filterBar/topicsList";
-// import { useNavigate } from "react-router-dom";
+import SearchBar from "./component/searchBar/SearchBar";
+import { Link } from "react-router-dom";
 interface NavbarProps {
 	mode: "loggedIn" | "loggedOut";
 	children?: ReactNode;
 }
 const NavBar = ({ mode, children }: NavbarProps) => {
-	// const navigate = useNavigate();
-	// const handleLogMode = () =>
-	// 	setLogMode((prev) => (prev == "loggedIn" ? "loggedOut" : "loggedIn"));
-
 	const handleClickAuthorise = () => {
 		const url = authorise();
 		// console.log(url);
@@ -24,13 +20,16 @@ const NavBar = ({ mode, children }: NavbarProps) => {
 	return (
 		<div id="container">
 			<div className="navbar__container">
-				<div id="logo__container">
+				<Link
+					to={"/me"}
+					id="logo__container"
+				>
 					<img
 						src="/src/stories/assets/header/logo/logo_black.svg"
 						height={30}
 						width={30}
 					/>
-				</div>
+				</Link>
 				<SearchBar />
 				<div id="login__container">
 					{mode == "loggedOut" ? (
