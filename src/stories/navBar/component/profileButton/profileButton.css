@@ -1,0 +1,19 @@
+#profile__button-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	height: 90%;
+}
+#profile__button {
+	background-color: transparent;
+	position: relative;
+	height: 90%;
+	width: auto;
+}
+
+#profile__button > img {
+	height: 100%;
+	width: auto;
+	background-color: transparent;
+}
