@@ -1,19 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-	EditorialPhotosType,
 	ErrorUnsplash,
 	getEditorialPhotos,
 } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
 import { useEffect, useRef, useState } from "react";
 import { usePhotoStore } from "../../store/store";
-import PhotoLayout from "../../stories/PhotoLayout/PhotoLayout";
+import PhotoLayoutGeneric from "../../stories/PhotoLayout/PhotoLayoutGeneric";
+import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
+
+/** Using useQuery */
 
 const conditionToShowErrorMessage = (remainingLimit: string) => {
 	return parseInt(remainingLimit, 10) < parseInt("2", 10);
 };
+
 const PhotoGallery = () => {
 	const { setAllPhotos } = usePhotoStore();
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState<number>(1);
 	const [mergedData, setMergedData] = useState<EditorialPhotosType[]>([]);
 	const [pageIncremented, setPageIncremented] = useState(false); // to increment page one at a time
 	const [limitExceeded, setLimitExceeded] = useState(false);
@@ -34,14 +37,17 @@ const PhotoGallery = () => {
 		//* WHICH in this case is "/" i.e <App/>
 		//* BETTER to set error page as below on this component.
 	);
+
 	useEffect(() => {
+		let count = 0;
+		console.log("data change", count++);
 		if (
 			data?.remainingLimit &&
 			conditionToShowErrorMessage(data?.remainingLimit)
 		) {
 			setLimitExceeded(true);
 		}
-		console.log("rerender", page, data?.remainingLimit, window.innerHeight);
+		// console.log("rerender", page, data?.remainingLimit, window.innerHeight);
 		if (!isLoading && !isError && data) {
 			setMergedData((prevData) => [...prevData, ...data.photos]);
 
@@ -59,7 +65,7 @@ const PhotoGallery = () => {
 				window.scrollTo(0, 0);
 			}
 		}
-	}, [isLoading, isError, data]);
+	}, [data]);
 
 	useEffect(() => {
 		// reset pageIncremented state
@@ -92,9 +98,11 @@ const PhotoGallery = () => {
 			window.removeEventListener("scroll", scrollListener);
 		};
 	}, []);
+
 	useEffect(() => {
 		setAllPhotos(mergedData);
 	}, [mergedData]);
+
 	if (isLoading) {
 		return <span>Loading...</span>;
 	}
@@ -126,7 +134,7 @@ const PhotoGallery = () => {
 						</p>
 					)}
 			</>
-			<PhotoLayout
+			<PhotoLayoutGeneric<EditorialPhotosType>
 				items={mergedData}
 				height="auto"
 				width="100%"
