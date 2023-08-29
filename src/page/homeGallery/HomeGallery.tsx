@@ -1,10 +1,15 @@
-import ModalContainer from "../../Components/ModalContainer";
+import { Suspense, lazy } from "react";
 import PhotoGallery from "../../Components/PhotoGallery";
+// import PhotoGalleryInfinite from "../../Components/PhotoGallery/indexInfinite";
+const ModalContainer = lazy(() => import("../../Components/ModalContainer"));
 
 const HomeGallery = () => {
 	return (
 		<>
-			<ModalContainer />
+			<Suspense fallback={<p>Loading...</p>}>
+				<ModalContainer />
+			</Suspense>
+			{/* <PhotoGalleryInfinite /> */}
 			<PhotoGallery />
 		</>
 	);
