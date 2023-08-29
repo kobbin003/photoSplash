@@ -1,26 +1,31 @@
 import { Link } from "react-router-dom";
 import { usePhotoStore } from "../../store/store";
+import findIndexOfCurrentPhoto from "../../utils/findIndexOfCurrentPhoto";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import { Button } from "../button/Button";
 import "./photoCard.css";
 interface PhotoCardProps<T> {
-	imgUrl: string;
+	imgUrlSmall: string;
+	imgUrlRegular: string;
 	height?: "tall" | "medium" | "normal" | "short";
 	photoData: T;
 }
 
 export const PhotoCard = <T extends EditorialPhotosType>({
-	imgUrl,
+	imgUrlSmall,
+	imgUrlRegular,
 	height,
 	photoData,
 	...props
 }: PhotoCardProps<T>) => {
-	const { setCurrentPhoto } = usePhotoStore();
-
+	const { setCurrentPhoto, setCurrentPhotoIndex, allPhotos } = usePhotoStore();
 	const handleOnClick = () => {
 		window.dispatchEvent(new Event("showModal"));
 		console.log("item clicked", photoData);
 		setCurrentPhoto(photoData);
+
+		const currentPhotoIndex = findIndexOfCurrentPhoto(photoData.id, allPhotos);
+		setCurrentPhotoIndex(currentPhotoIndex);
 	};
 	return (
 		<div
@@ -29,7 +34,11 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 			onClick={handleOnClick}
 			style={{ cursor: "zoom-in" }}
 		>
-			<img src={imgUrl} />
+			<img
+				src={imgUrlRegular}
+				loading="lazy"
+				srcSet={`${imgUrlSmall} 400, ${imgUrlRegular} 1080`}
+			/>
 			<div className="onHoverDisplay">
 				<div className="onHoverDisplay-top">
 					<Button

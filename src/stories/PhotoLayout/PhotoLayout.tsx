@@ -1,4 +1,4 @@
-import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
+import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import { PhotoCard } from "../photoCard/PhotoCard";
 import "./photoLayout.css";
 
@@ -23,7 +23,8 @@ const PhotoLayout = ({ items, height, width }: PhotoLayout) => {
 				const randomHeight: Height = heightArr[randomIndex];
 				return (
 					<PhotoCard
-						imgUrl={`${item.urls.regular}`}
+						imgUrlSmall={`${item.urls.small}`}
+						imgUrlRegular={`${item.urls.regular}`}
 						height={randomHeight}
 						key={item.id + index}
 						photoData={item}
