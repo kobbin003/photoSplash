@@ -1,25 +1,23 @@
 #photo {
 	position: relative;
-	padding-top: 80px;
-	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 1em;
-	/* background-color: aqua; */
 	@media (max-width: 990px) {
 		width: 100%;
 	}
-	& img {
+	> img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
 	> button {
-		height: 5%;
-		position: absolute;
-		top: 100px;
-		right: 30px;
+		height: 2em;
 		background-color: transparent;
+		> img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
 	}
 }
