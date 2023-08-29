@@ -1,14 +1,20 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { Button } from "../../../button/Button";
 import { Link } from "react-router-dom";
 import "./style.css";
 import { EditorialPhotosType } from "../../../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
+import { ZoomContext } from "../../../../Components/ModalContainer";
 interface HeaderProps {
 	currentPhoto: EditorialPhotosType;
 }
 const Header: FC<HeaderProps> = ({ currentPhoto }) => {
+	const context = useContext(ZoomContext);
+
 	return (
-		<div id="header">
+		<div
+			id="header"
+			style={{ display: context?.zoom ? "none" : "flex" }}
+		>
 			<div id="userInfo">
 				<Link to="">
 					<img

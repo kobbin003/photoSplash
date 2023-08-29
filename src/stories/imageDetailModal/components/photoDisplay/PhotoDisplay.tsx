@@ -1,36 +1,43 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Urls } from "../../../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import "./style.css";
+import { ZoomContext } from "../../../../Components/ModalContainer";
 interface PhotoDisplayProps {
 	photoUrls: Urls;
 }
 const PhotoDisplay: React.FC<PhotoDisplayProps> = ({ photoUrls }) => {
-	const [zoom, setZoom] = useState(false);
+	const context = useContext(ZoomContext);
 	const handleClickZoom = () => {
-		setZoom((prev) => !prev);
+		context?.setZoom((prev) => !prev);
 	};
 	return (
 		<div
 			id="photo"
 			style={{
-				width: `${zoom ? "100%" : "50%"}`,
-				cursor: `${zoom ? "zoom-out" : "zoom-in"}`,
+				cursor: `${context?.zoom ? "zoom-out" : "zoom-in"}`,
+				width: `${context?.zoom ? "100vw" : "50%"}`,
+				height: `${context?.zoom ? "fit-content" : "100vh"}`,
+				paddingTop: `${context?.zoom ? "0" : "80px"}`,
+				marginBottom: `${context?.zoom ? "0" : "1em"}`,
 			}}
 		>
 			<img
-				src={zoom ? photoUrls.regular : photoUrls.full}
+				src={context?.zoom ? photoUrls.full : photoUrls.regular}
 				alt=""
 				onClick={handleClickZoom}
 			/>
 			<button
 				onClick={handleClickZoom}
 				style={{
-					cursor: `${zoom ? "zoom-out" : "zoom-in"}`,
+					cursor: context?.zoom ? "zoom-out" : "zoom-in",
+					top: context?.zoom ? "4.5%" : "15%",
+					right: context?.zoom ? "4%" : "5%",
+					position: context?.zoom ? "fixed" : "absolute",
 				}}
 			>
 				<img
 					src={
-						zoom
+						context?.zoom
 							? "/src/stories/assets/modal/zoomIn.svg"
 							: "/src/stories/assets/modal/zoomOut.svg"
 					}
