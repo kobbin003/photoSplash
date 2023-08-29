@@ -5,6 +5,7 @@ import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/typ
 import { Button } from "../button/Button";
 import "./photoCard.css";
 interface PhotoCardProps<T> {
+	imgUrlXSmall: string;
 	imgUrlSmall: string;
 	imgUrlRegular: string;
 	height?: "tall" | "medium" | "normal" | "short";
@@ -12,6 +13,7 @@ interface PhotoCardProps<T> {
 }
 
 export const PhotoCard = <T extends EditorialPhotosType>({
+	imgUrlXSmall,
 	imgUrlSmall,
 	imgUrlRegular,
 	height,
@@ -39,6 +41,12 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 				loading="lazy"
 				srcSet={`${imgUrlSmall} 400, ${imgUrlRegular} 1080`}
 			/>
+			<div
+				id="blurred_image"
+				style={{
+					background: `url(${imgUrlXSmall}) center/cover no-repeat`,
+				}}
+			></div>
 			<div className="onHoverDisplay">
 				<div className="onHoverDisplay-top">
 					<Button
