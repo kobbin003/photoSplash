@@ -20,10 +20,10 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 	photoData,
 	...props
 }: PhotoCardProps<T>) => {
-	const { setCurrentPhoto, setCurrentPhotoIndex, allPhotos } = usePhotoStore();
+	const { setCurrentPhoto, setCurrentPhotoIndex, allPhotos, setShowModal } =
+		usePhotoStore();
 	const handleOnClick = () => {
-		window.dispatchEvent(new Event("showModal"));
-		// console.log("item clicked", photoData);
+		setShowModal(true);
 		setCurrentPhoto(photoData);
 
 		const currentPhotoIndex = findIndexOfCurrentPhoto(photoData.id, allPhotos);
