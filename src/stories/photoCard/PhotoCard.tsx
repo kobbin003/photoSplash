@@ -23,7 +23,7 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 	const { setCurrentPhoto, setCurrentPhotoIndex, allPhotos } = usePhotoStore();
 	const handleOnClick = () => {
 		window.dispatchEvent(new Event("showModal"));
-		console.log("item clicked", photoData);
+		// console.log("item clicked", photoData);
 		setCurrentPhoto(photoData);
 
 		const currentPhotoIndex = findIndexOfCurrentPhoto(photoData.id, allPhotos);
@@ -39,7 +39,7 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 			<img
 				src={imgUrlRegular}
 				loading="lazy"
-				srcSet={`${imgUrlSmall} 400, ${imgUrlRegular} 1080`}
+				srcSet={`${imgUrlSmall} 400w, ${imgUrlRegular} 1080w`}
 			/>
 			<div
 				id="blurred_image"
