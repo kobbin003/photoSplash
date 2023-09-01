@@ -23,7 +23,7 @@ export const LocationAddress = ({ location }: { location: Location }) => {
 		return <span>Error{error.message}</span>;
 	}
 	if (isLoading) return <p>Loading...</p>;
-	console.log("locationAddress", data, location);
+	// console.log("locationAddress", data, location);
 	return (
 		<>
 			{data.features.length > 0 ? (
