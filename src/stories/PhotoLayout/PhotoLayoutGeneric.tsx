@@ -28,6 +28,7 @@ const PhotoLayoutGeneric = <T extends EditorialPhotosType>({
 				const randomHeight: Height = heightArr[randomIndex];
 				return (
 					<PhotoCard<T>
+						imgUrlXSmall={`${item.urls.thumb}`}
 						imgUrlSmall={`${item.urls.small}`}
 						imgUrlRegular={`${item.urls.regular}`}
 						height={randomHeight}
