@@ -4,7 +4,7 @@ import { Location } from "../unsplashData/type/Photo";
 export const reverseGeocode = async ({ queryKey }: any) => {
 	const [_, location] = queryKey;
 	const typedLocation = location as Location["position"];
-	// console.log(location);
+	// console.log("mapbox", location);
 	const url = `https://api.mapbox.com/search/geocode/v6/reverse?types=address&longitude=${typedLocation.longitude}&latitude=${typedLocation.latitude}&access_token=${mapboxToken}`;
 	try {
 		const response = await fetch(url);

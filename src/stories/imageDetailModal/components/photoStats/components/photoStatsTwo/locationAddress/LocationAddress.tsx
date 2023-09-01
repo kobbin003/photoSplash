@@ -23,13 +23,23 @@ export const LocationAddress = ({ location }: { location: Location }) => {
 		return <span>Error{error.message}</span>;
 	}
 	if (isLoading) return <p>Loading...</p>;
-	// console.log("locationAddress", data);
+	console.log("locationAddress", data, location);
 	return (
-		<p>
-			<span>{data.features[0].properties.context.address.name},</span>
-			<span>&nbsp;{data.features[0].properties.context.place.name},</span>
-			<span>&nbsp;{data.features[0].properties.context.country.name}</span>
-		</p>
+		<>
+			{data.features.length > 0 ? (
+				<p>
+					<span>{data.features[0].properties.context.address.name},</span>
+					<span>&nbsp;{data.features[0].properties.context.place.name},</span>
+					<span>&nbsp;{data.features[0].properties.context.country.name}</span>
+				</p>
+			) : (
+				<p>
+					<span>{location.name},</span>
+					<span>&nbsp;{location.city},</span>
+					<span>&nbsp;{location.country}</span>
+				</p>
+			)}
+		</>
 	);
 };
 
