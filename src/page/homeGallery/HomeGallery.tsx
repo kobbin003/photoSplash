@@ -1,14 +1,21 @@
-import { Suspense, lazy } from "react";
 import PhotoGallery from "../../Components/PhotoGallery";
+import { usePhotoStore } from "../../store/store";
+import ModalContainer from "../../Components/ModalContainer";
+import { useEffect } from "react";
 // import PhotoGalleryInfinite from "../../Components/PhotoGallery/indexInfinite";
-const ModalContainer = lazy(() => import("../../Components/ModalContainer"));
 
 const HomeGallery = () => {
+	const { showModal } = usePhotoStore();
+	useEffect(() => {
+		if (showModal) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "scroll";
+		}
+	}, [showModal]);
 	return (
 		<>
-			<Suspense fallback={<p>Loading...</p>}>
-				<ModalContainer />
-			</Suspense>
+			{showModal && <ModalContainer />}
 			{/* <PhotoGalleryInfinite /> */}
 			<PhotoGallery />
 		</>
