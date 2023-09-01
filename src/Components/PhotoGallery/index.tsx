@@ -15,7 +15,7 @@ const conditionToShowErrorMessage = (remainingLimit: string) => {
 };
 
 const PhotoGallery = () => {
-	const { setAllPhotos } = usePhotoStore();
+	const { setAllPhotos, allPhotos } = usePhotoStore();
 	const [page, setPage] = useState<number>(1);
 	const [mergedData, setMergedData] = useState<EditorialPhotosType[]>([]);
 	const [pageIncremented, setPageIncremented] = useState(false); // to increment page one at a time
@@ -39,8 +39,8 @@ const PhotoGallery = () => {
 	);
 
 	useEffect(() => {
-		let count = 0;
-		console.log("data change", count++);
+		// let count = 0;
+		// console.log("data change", count++);
 		if (
 			data?.remainingLimit &&
 			conditionToShowErrorMessage(data?.remainingLimit)
@@ -134,11 +134,22 @@ const PhotoGallery = () => {
 						</p>
 					)}
 			</>
-			<PhotoLayoutGeneric<EditorialPhotosType>
-				items={mergedData}
-				height="auto"
-				width="100%"
-			/>
+			{allPhotos ? (
+				/**after the first fetch i.e when "allPhotos is set
+				 * set items as allPhotos, because we need it in <ModalContainer/>" */
+				<PhotoLayoutGeneric<EditorialPhotosType>
+					// items={mergedData}
+					items={allPhotos}
+					height="auto"
+					width="100%"
+				/>
+			) : (
+				<PhotoLayoutGeneric<EditorialPhotosType>
+					items={mergedData}
+					height="auto"
+					width="100%"
+				/>
+			)}
 		</>
 	);
 };
