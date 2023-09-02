@@ -85,8 +85,18 @@
 	}
 }
 
+#scrollableContent::-moz-scrollbar {
+	height: 0px;
+	visibility: hidden;
+}
+#scrollableContent::-moz-scrollbar-track {
+	background-color: #d3d3d3;
+}
+
+#scrollableContent::-moz-scrollbar-thumb {
+	background-color: grey;
+}
 #scrollableContent::-webkit-scrollbar {
-	/* width: 5px; */
 	height: 0px;
 	visibility: hidden;
 }
