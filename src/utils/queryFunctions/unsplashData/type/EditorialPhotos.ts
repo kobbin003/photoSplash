@@ -13,8 +13,6 @@ export interface EditorialPhotosType {
 	current_user_collections: CurrentUserCollection[];
 	urls: Urls;
 	links: Links2;
-	//---add page
-	page?: number;
 }
 
 export interface User {

@@ -49,16 +49,8 @@ export const getEditorialPhotos = async ({ queryKey }: any) => {
 		// console.log("limit-2", response.headers.get("X-Ratelimit-Remaining"));
 		const remainingLimit = response.headers.get("X-Ratelimit-Remaining");
 		const photos: EditorialPhotosType[] = await response.json();
-		// -----------page property has been added with the photosData---------------
-		const photosWithPage: EditorialPhotosType[] = photos.map((item) => {
-			const returnedData = { ...item, page };
-			page++;
-			return returnedData;
-		});
-		// console.log("after page incremented", photosWithPage);
 
-		// return { photos, remainingLimit };
-		return { photos: photosWithPage, remainingLimit };
+		return { photos, remainingLimit };
 	} catch (error) {
 		console.log("fetch-error", error);
 		//* this will be consumed as data
