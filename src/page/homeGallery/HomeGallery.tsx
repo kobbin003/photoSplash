@@ -13,6 +13,7 @@ const HomeGallery = () => {
 			document.body.style.overflow = "scroll";
 		}
 	}, [showModal]);
+
 	return (
 		<>
 			{showModal && <ModalContainer />}
