@@ -1,5 +1,4 @@
 import React, {
-	FC,
 	ForwardRefRenderFunction,
 	forwardRef,
 	useEffect,
