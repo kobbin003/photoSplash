@@ -1,41 +1,55 @@
 #modalContainer {
 	position: fixed;
+	display: flex;
+	justify-content: center;
+	z-index: 2;
+	height: 100vh;
+	width: calc(100vw - (100vw - 100%));
+}
+#modalCompContainer {
+	position: fixed;
 	height: 100vh;
 	width: 100%;
-	z-index: 1;
 	display: flex;
 	justify-content: center;
 	overflow-y: scroll;
-	/* overscroll-behavior: contain; */
 }
 #blackCurtain {
 	background-color: rgba(0, 0, 0, 0.517);
 	height: 100vh;
 	width: 100vw;
-	z-index: 1;
 	position: fixed;
 	display: flex;
 	justify-content: space-between;
 }
 .blackSpace {
 	position: fixed;
-	z-index: 10;
 	height: 100vh;
 	width: 100px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* flex: 1; */
-	& button {
-		/* cursor: pointer; */
-		height: 35px;
+	& img {
+		height: 100%;
 	}
-	& button:hover img {
+}
+.navigateButton {
+	position: relative;
+	background-color: transparent;
+	height: 35px;
+	&:hover img {
 		filter: brightness(120%);
 		scale: 1.1;
 	}
-	& img {
-		height: 100%;
+}
+.disabledButton {
+	position: relative;
+	cursor: default;
+	filter: brightness(60%);
+	background-color: transparent;
+	height: 35px;
+	> img {
+		scale: 0.8;
 	}
 }
 .blackSpace__left {
@@ -46,6 +60,42 @@
 }
 #close {
 	position: absolute;
+	background-color: transparent;
+	height: 35px;
 	top: 1em;
 	height: 40px;
+	&:hover img {
+		filter: brightness(120%);
+		scale: 1.1;
+	}
+}
+
+.info {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: baseline;
+	border-radius: 5px;
+	padding: 0.2em;
+	filter: brightness(200%);
+	white-space: nowrap;
+	> p {
+		font-size: 0.8rem;
+		scale: 0.9;
+		font-weight: 400;
+	}
+}
+.info_left {
+	background-color: rgb(1, 64, 253);
+	color: white;
+	border: 1.5px solid rgb(1, 64, 253);
+	top: -100%;
+	left: -10%;
+}
+.info_right {
+	background-color: red;
+	color: white;
+	border: 1.5px solid red;
+	top: -150%;
+	right: -50%;
 }
