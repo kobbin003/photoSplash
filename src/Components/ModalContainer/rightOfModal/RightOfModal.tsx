@@ -1,4 +1,4 @@
-import { FC, ForwardRefRenderFunction, forwardRef, useState } from "react";
+import { ForwardRefRenderFunction, forwardRef, useState } from "react";
 import { usePhotoStore } from "../../../store/store";
 
 interface RightOfModalProps {
