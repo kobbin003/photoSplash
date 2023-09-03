@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useEffect } from "react";
 
 export const useClickedOutsideId = (ids: string[], callback: () => void) => {
 	ids.map((id) => {
