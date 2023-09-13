@@ -1,0 +1,30 @@
+#ProfileUserPhotoNav {
+	position: relative;
+	display: flex;
+	gap: 2em;
+	padding: 0 1em;
+	/* background-color: royalblue; */
+	border-bottom: 1px solid #d3d3d3;
+	font-size: 18px;
+	> a {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-decoration: none;
+		color: #767676;
+		/* background-color: bisque; */
+		height: 3em;
+		gap: 1em;
+		> img {
+			height: 40%;
+			width: auto;
+		}
+	}
+}
+
+.current {
+	border-bottom: 3px solid black;
+}
+.transparentBorderbottom {
+	border-bottom: 3px solid transparent;
+}

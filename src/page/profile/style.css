@@ -1,0 +1,8 @@
+#profileContainer {
+	position: relative;
+	top: calc(110 / 2 * 1px);
+	width: 100%;
+	width: calc(100vw - (100vw - 100%));
+	/* width: calc(100vw - 100px); */
+	/* background-color: thistle; */
+}
