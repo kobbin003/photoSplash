@@ -1,0 +1,13 @@
+<svg fill="#d3d3d3" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 370 370" xml:space="preserve" stroke="#d3d3d3">
+    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+    <g id="SVGRepo_iconCarrier">
+        <g>
+            <path
+                d="M334.608,0H35.393C15.877,0,0,15.877,0,35.393v299.215C0,354.123,15.877,370,35.393,370h299.215 C354.123,370,370,354.123,370,334.607V35.393C370,15.877,354.123,0,334.608,0z M330,226.57 c-3.442-4.498-50.389-67.375-71.77-67.375s-50.203,37.204-50.203,37.204c-6.056-8.991-15.633-22.837-26.247-36.777 c-33.754-44.327-47.593-49.722-56.647-49.204c-8.879,0.531-21.909,7.167-64.392,79.639C53.327,202.705,46.187,215.393,40,226.61V40 h290V226.57z">
+            </path>
+            <circle cx="265.764" cy="93.189" r="26.516"></circle>
+        </g>
+    </g>
+</svg>
