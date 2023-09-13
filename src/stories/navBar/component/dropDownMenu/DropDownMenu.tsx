@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import "./dropDownMenu.css";
 interface DropDownMenu {
@@ -16,10 +16,20 @@ const DropDownMenu: FC<DropDownMenu> = ({ showDropDownMenu }) => {
 		>
 			<ul>
 				<li>
-					<Link to={"/me/profile"}>View Profile</Link>
+					<Link
+						to={"/me/profile"}
+						state={{ show: "Photos" }}
+					>
+						View Profile
+					</Link>
 				</li>
 				<li>
-					<Link to={"/me/stats"}>Stats</Link>
+					<Link
+						to={"/me/profile/stats"}
+						state={{ show: "Stats" }}
+					>
+						Stats
+					</Link>
 				</li>
 			</ul>
 			<ul>

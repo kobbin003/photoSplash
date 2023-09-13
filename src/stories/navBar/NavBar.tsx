@@ -10,8 +10,9 @@ import { Link } from "react-router-dom";
 interface NavbarProps {
 	mode: "loggedIn" | "loggedOut";
 	children?: ReactNode;
+	filterbar?: boolean;
 }
-const NavBar = ({ mode }: NavbarProps) => {
+const NavBar = ({ mode, filterbar }: NavbarProps) => {
 	const handleClickAuthorise = () => {
 		const url = authorise();
 		// console.log(url);
@@ -43,7 +44,7 @@ const NavBar = ({ mode }: NavbarProps) => {
 					)}
 				</div>
 			</div>
-			<FilterBar topics={topics} />
+			{filterbar && <FilterBar topics={topics} />}
 		</div>
 	);
 };
