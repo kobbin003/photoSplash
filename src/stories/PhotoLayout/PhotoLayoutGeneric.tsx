@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import {} from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import { PhotoCard } from "../photoCard/PhotoCard";
@@ -13,12 +14,14 @@ const PhotoLayoutGeneric = <T extends EditorialPhotosType>({
 	height,
 	width,
 }: PhotoLayout<T>) => {
+	const { pathname } = useLocation();
 	return (
 		<div
 			className="photoLayoutGridContainer"
 			style={{
 				height: `${height}`,
 				width: `${width}`,
+				top: pathname == "/me" ? "110px" : "50px",
 			}}
 		>
 			{items.map((item, index) => {

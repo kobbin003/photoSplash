@@ -23,6 +23,7 @@ const PhotoLayout = ({ items, height, width }: PhotoLayout) => {
 				const randomHeight: Height = heightArr[randomIndex];
 				return (
 					<PhotoCard
+						imgUrlXSmall={`${item.urls.thumb}`}
 						imgUrlSmall={`${item.urls.small}`}
 						imgUrlRegular={`${item.urls.regular}`}
 						height={randomHeight}
