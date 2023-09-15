@@ -54,6 +54,7 @@ const ModalContainer = () => {
 	// useClickedOutsideId(ids, () => {
 	// 	setShowModal(false);
 	// });
+
 	//* fetch only if the photo clicked is the last photo in allPhotos
 	useEffect(() => {
 		if (allPhotos) {
