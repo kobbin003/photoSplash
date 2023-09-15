@@ -6,27 +6,28 @@ import {
 	getAuthToken,
 } from "../../utils/queryFunctions/auth/getAuthToken";
 import { ErrorUnsplash } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
+import { usePhotoStore } from "../../store/store";
 
 const LogIn = () => {
 	const [code, setCode] = useState("");
+
+	const { setAccessToken } = usePhotoStore();
+
 	const navigate = useNavigate();
-	console.log("code in login", code);
-	// if (code) {
-	const { isLoading, isError, data, error } = useQuery<
-		AuthToken,
-		ErrorUnsplash
-	>(["authToken", code], getAuthToken, {
+
+	useQuery<AuthToken, ErrorUnsplash>(["authToken", code], getAuthToken, {
 		enabled: !!code,
 		onSuccess: (data) => {
-			console.log("success");
 			//store the token in local storage
 			const token = data.access_token;
-			if (token) localStorage.setItem("tokenUnsplash", token);
+
+			// if (token) localStorage.setItem("tokenUnsplash", token);
+			setAccessToken(token);
+
 			// go to /me after getting the token data.
 			navigate("/me");
 		},
 	});
-	console.log(isLoading, isError, data, error);
 
 	useEffect(() => {
 		const urlSearchParams = new URLSearchParams(window.location.search);
