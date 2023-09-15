@@ -1,56 +1,50 @@
-import { useQuery } from "@tanstack/react-query";
-import {
-	ErrorUnsplash,
-	getEditorialPhotos,
-} from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
-import { useEffect, useRef, useState } from "react";
+import { Dispatch, useEffect, useRef, useState } from "react";
 import { usePhotoStore } from "../../store/store";
 import PhotoLayoutGeneric from "../../stories/PhotoLayout/PhotoLayoutGeneric";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
+import arraysHaveSameContent from "../../utils/arraysHaveSameContent";
+import { GalleryPhotoType } from "../../page/homeGallery/HomeGallery";
+import { conditionToShowErrorMessage } from "../../utils/conditionToShowErrorMessage";
 
-/** Using useQuery */
-
-const conditionToShowErrorMessage = (remainingLimit: string) => {
-	return parseInt(remainingLimit, 10) < parseInt("2", 10);
+type PhotoGalleryProp<T> = {
+	data: T;
+	isLoading: boolean;
+	isError: boolean;
+	setPage: Dispatch<React.SetStateAction<number>>;
+	setLimitExceeded: Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PhotoGallery = () => {
-	const { setAllPhotos, allPhotos } = usePhotoStore();
-	const [page, setPage] = useState<number>(1);
-	const [mergedData, setMergedData] = useState<EditorialPhotosType[]>([]);
+const PhotoGallery = <T extends GalleryPhotoType>({
+	data,
+	isLoading,
+	isError,
+	setLimitExceeded,
+	setPage,
+}: PhotoGalleryProp<T>) => {
+	const { allPhotos, setAllPhotosPush } = usePhotoStore();
+
 	const [pageIncremented, setPageIncremented] = useState(false); // to increment page one at a time
-	const [limitExceeded, setLimitExceeded] = useState(false);
+
 	const scrolledYRef = useRef<number>();
-	const { isLoading, isError, data, error } = useQuery<
-		{ photos: EditorialPhotosType[]; remainingLimit: string | null },
-		ErrorUnsplash
-	>(
-		["singlePhoto", page],
-		getEditorialPhotos,
-		{
-			keepPreviousData: true,
-			useErrorBoundary: false,
-			enabled: limitExceeded ? false : true, // pause it if limitExceeded
-		}
-		// ,		{ useErrorBoundary: true }
-		//* using useErrorBoundary will propagate the error to the nearest error boundary in the component tree.
-		//* WHICH in this case is "/" i.e <App/>
-		//* BETTER to set error page as below on this component.
-	);
 
 	useEffect(() => {
-		// let count = 0;
-		// console.log("data change", count++);
 		if (
 			data?.remainingLimit &&
 			conditionToShowErrorMessage(data?.remainingLimit)
 		) {
 			setLimitExceeded(true);
 		}
-		// console.log("rerender", page, data?.remainingLimit, window.innerHeight);
-		if (!isLoading && !isError && data) {
-			setMergedData((prevData) => [...prevData, ...data.photos]);
 
+		if (!isLoading && !isError && data) {
+			setAllPhotosPush((prev) => {
+				if (!arraysHaveSameContent(prev, data.photos)) {
+					// console.log("not");
+					return [...prev, ...data.photos];
+				} else {
+					// console.log("yes");
+					return [...prev];
+				}
+			});
 			if (scrolledYRef.current) {
 				window.scrollTo(0, scrolledYRef.current);
 				//! ISSUES:
@@ -61,7 +55,7 @@ const PhotoGallery = () => {
 				//* THEREFORE, we get scrollPostion other than the one we set.
 				//! try - keepPreviousData: true OR useInfiniteQuery
 			} else {
-				console.log("NOT FOUND");
+				// console.log("NOT FOUND");
 				window.scrollTo(0, 0);
 			}
 		}
@@ -99,19 +93,6 @@ const PhotoGallery = () => {
 		};
 	}, []);
 
-	useEffect(() => {
-		setAllPhotos(mergedData);
-	}, [mergedData]);
-
-	if (isLoading) {
-		return <span>Loading...</span>;
-	}
-
-	if (isError) {
-		console.log("client", error);
-		return <span>Error</span>;
-	}
-
 	return (
 		<>
 			<>
@@ -138,14 +119,13 @@ const PhotoGallery = () => {
 				/**after the first fetch i.e when "allPhotos is set
 				 * set items as allPhotos, because we need it in <ModalContainer/>" */
 				<PhotoLayoutGeneric<EditorialPhotosType>
-					// items={mergedData}
 					items={allPhotos}
 					height="auto"
 					width="100%"
 				/>
 			) : (
 				<PhotoLayoutGeneric<EditorialPhotosType>
-					items={mergedData}
+					items={data.photos}
 					height="auto"
 					width="100%"
 				/>
