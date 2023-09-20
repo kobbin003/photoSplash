@@ -6,15 +6,14 @@ import {
 	ErrorUnsplash,
 	getEditorialPhotos,
 } from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
+import { usePhotoStore } from "../../store/store";
 
-export type GalleryPhotoType = {
-	photos: EditorialPhotosType[];
-	remainingLimit: string | null;
-};
 const HomeGallery = () => {
 	const [page, setPage] = useState<number>(1);
 
 	const [limitExceeded, setLimitExceeded] = useState(false);
+
+	const { allPhotos, setAllPhotosPush } = usePhotoStore();
 
 	const { isLoading, isError, data, error } = useQuery<
 		{ photos: EditorialPhotosType[]; remainingLimit: string | null },
@@ -32,6 +31,7 @@ const HomeGallery = () => {
 		//* WHICH in this case is "/" i.e <App/>
 		//* BETTER to set error page as below on this component.
 	);
+	console.log("home gallery");
 
 	if (isLoading) {
 		return <span>Loading...</span>;
@@ -43,12 +43,14 @@ const HomeGallery = () => {
 	}
 	return (
 		<>
-			<PhotoGallery<GalleryPhotoType>
+			<PhotoGallery<EditorialPhotosType>
 				data={data}
 				isError={isError}
 				isLoading={isLoading}
 				setLimitExceeded={setLimitExceeded}
 				setPage={setPage}
+				allPhotos={allPhotos}
+				setAllPhotosPush={setAllPhotosPush}
 			/>
 		</>
 	);

@@ -21,12 +21,16 @@ type Story = StoryObj<typeof meta>;
 
 export const photoCardStandAlone: Story = {
 	args: {
-		imgUrl: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
+		imgUrlRegular: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
+		imgUrlSmall: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
+		imgUrlXSmall: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
 	},
 };
 export const photoCardGridItem: Story = {
 	args: {
-		imgUrl: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
+		imgUrlRegular: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
+		imgUrlSmall: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
+		imgUrlXSmall: "/src/stories/assets/hooman-r-eDLeSvWI4OI-unsplash.jpg",
 		// height: "auto-fit",
 		// width: "auto-fit",
 		// height: "200px",

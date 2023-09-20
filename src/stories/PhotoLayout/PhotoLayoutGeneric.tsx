@@ -1,27 +1,31 @@
 import { useLocation } from "react-router-dom";
-import {} from "../../utils/queryFunctions/unsplashData/getEditorialPhotos";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import { PhotoCard } from "../photoCard/PhotoCard";
 import "./photoLayout.css";
+import { UserLikeedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserLikedPhotos";
+import { UserUploadedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserUploadedPhotos";
 
 interface PhotoLayout<T> {
 	items: T[];
 	height: string;
 	width: string;
 }
-const PhotoLayoutGeneric = <T extends EditorialPhotosType>({
+const PhotoLayoutGeneric = <
+	T extends EditorialPhotosType | UserLikeedPhoto | UserUploadedPhoto
+>({
 	items,
 	height,
 	width,
 }: PhotoLayout<T>) => {
 	const { pathname } = useLocation();
+	const isInProfileRoute = pathname.includes("profile");
 	return (
 		<div
 			className="photoLayoutGridContainer"
 			style={{
 				height: `${height}`,
 				width: `${width}`,
-				top: pathname == "/me" ? "110px" : "50px",
+				top: isInProfileRoute ? "50px" : "110px",
 			}}
 		>
 			{items.map((item, index) => {

@@ -1,28 +1,32 @@
 import { Dispatch, useEffect, useRef, useState } from "react";
-import { usePhotoStore } from "../../store/store";
 import PhotoLayoutGeneric from "../../stories/PhotoLayout/PhotoLayoutGeneric";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import arraysHaveSameContent from "../../utils/arraysHaveSameContent";
-import { GalleryPhotoType } from "../../page/homeGallery/HomeGallery";
 import { conditionToShowErrorMessage } from "../../utils/conditionToShowErrorMessage";
+import { UserLikeedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserLikedPhotos";
+import { UserUploadedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserUploadedPhotos";
 
 type PhotoGalleryProp<T> = {
-	data: T;
+	data: { photos: T[]; remainingLimit: string | null };
 	isLoading: boolean;
 	isError: boolean;
 	setPage: Dispatch<React.SetStateAction<number>>;
 	setLimitExceeded: Dispatch<React.SetStateAction<boolean>>;
+	allPhotos: T[] | null;
+	setAllPhotosPush: (fn: (prevData: T[]) => T[]) => void;
 };
 
-const PhotoGallery = <T extends GalleryPhotoType>({
+const PhotoGallery = <
+	T extends EditorialPhotosType | UserLikeedPhoto | UserUploadedPhoto
+>({
 	data,
 	isLoading,
 	isError,
 	setLimitExceeded,
 	setPage,
+	allPhotos,
+	setAllPhotosPush,
 }: PhotoGalleryProp<T>) => {
-	const { allPhotos, setAllPhotosPush } = usePhotoStore();
-
 	const [pageIncremented, setPageIncremented] = useState(false); // to increment page one at a time
 
 	const scrolledYRef = useRef<number>();
@@ -118,13 +122,13 @@ const PhotoGallery = <T extends GalleryPhotoType>({
 			{allPhotos ? (
 				/**after the first fetch i.e when "allPhotos is set
 				 * set items as allPhotos, because we need it in <ModalContainer/>" */
-				<PhotoLayoutGeneric<EditorialPhotosType>
+				<PhotoLayoutGeneric<T>
 					items={allPhotos}
 					height="auto"
 					width="100%"
 				/>
 			) : (
-				<PhotoLayoutGeneric<EditorialPhotosType>
+				<PhotoLayoutGeneric<T>
 					items={data.photos}
 					height="auto"
 					width="100%"

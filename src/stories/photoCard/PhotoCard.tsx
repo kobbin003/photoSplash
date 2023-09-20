@@ -1,9 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { usePhotoStore } from "../../store/store";
-import findIndexOfCurrentPhoto from "../../utils/findIndexOfCurrentPhoto";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import { Button } from "../button/Button";
 import "./photoCard.css";
+import { MouseEvent } from "react";
+import { UserUploadedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserUploadedPhotos";
+import { UserLikeedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserLikedPhotos";
+
 interface PhotoCardProps<T> {
 	imgUrlXSmall: string;
 	imgUrlSmall: string;
@@ -12,7 +15,9 @@ interface PhotoCardProps<T> {
 	photoData: T;
 }
 
-export const PhotoCard = <T extends EditorialPhotosType>({
+export const PhotoCard = <
+	T extends EditorialPhotosType | UserLikeedPhoto | UserUploadedPhoto
+>({
 	imgUrlXSmall,
 	imgUrlSmall,
 	imgUrlRegular,
@@ -20,14 +25,22 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 	photoData,
 	...props
 }: PhotoCardProps<T>) => {
-	const { setCurrentPhoto, setCurrentPhotoIndex, allPhotos, setShowModal } =
-		usePhotoStore();
+	const { setCurrentPhoto, setShowModal } = usePhotoStore();
+
+	const { pathname } = useLocation();
+
+	const profileLink = pathname.includes("me")
+		? `/me/profile/${photoData.user.username}`
+		: `/profile/${photoData.user.username}`;
+
 	const handleOnClick = () => {
+		console.log("modal show");
 		setShowModal(true);
 		setCurrentPhoto(photoData);
+	};
 
-		const currentPhotoIndex = findIndexOfCurrentPhoto(photoData.id, allPhotos);
-		setCurrentPhotoIndex(currentPhotoIndex);
+	const handleClickLink = (e: MouseEvent<HTMLAnchorElement>) => {
+		e.stopPropagation();
 	};
 	return (
 		<div
@@ -62,7 +75,10 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 				</div>
 				<div className="onHoverDisplay-bottom">
 					<div className="userInfo">
-						<Link to={""}>
+						<Link
+							to={profileLink}
+							onClick={handleClickLink}
+						>
 							<img
 								src={
 									photoData.user.profile_image.medium ||
@@ -70,7 +86,12 @@ export const PhotoCard = <T extends EditorialPhotosType>({
 								}
 							/>
 						</Link>
-						<Link to="">{photoData.user.name}</Link>
+						<Link
+							to={profileLink}
+							onClick={handleClickLink}
+						>
+							{photoData.user.name}
+						</Link>
 					</div>
 					<Button
 						height={35}
