@@ -1,0 +1,62 @@
+.collection_card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	/* align-items: flex-start; */
+	gap: 0.5em;
+	/* font-size: inherit; */
+	height: 100%;
+	width: 100%;
+	/* background-color: aquamarine; */
+
+	> a {
+		position: relative;
+		/* display: flex; */
+		height: 80%;
+		width: 100%;
+		/* background-color: cadetblue; */
+		cursor: pointer;
+		filter: brightness(99%);
+		text-decoration: none;
+		&:hover {
+			filter: brightness(102%);
+		}
+		> img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+			border-radius: 5px;
+		}
+	}
+	> div {
+		position: relative;
+		height: 15%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		& a {
+			color: inherit;
+			text-decoration: none;
+			width: max-content;
+			&:hover {
+				color: black;
+				text-decoration: underline;
+			}
+		}
+		> div {
+			/* background-color: burlywood; */
+			position: relative;
+			display: flex;
+			align-items: center;
+			color: #767676;
+			> p {
+				font-size: 0.9rem;
+			}
+			> span {
+				/* background-color: aqua; */
+				position: relative;
+				top: -25%;
+			}
+		}
+	}
+}
