@@ -10,6 +10,9 @@ import Photos from "./page/profile/photos/Photos";
 import Stats from "./page/profile/stats/Stats";
 import Likes from "./page/profile/likes/Likes";
 import Collections from "./page/profile/collections/Collections";
+import CollectionPage from "./page/profile/collections/collectionPage/CollectionPage";
+// import HomeGalleryInfinite from "./page/homeGallery/HomeGalleryInfinite";
+
 export const router = createBrowserRouter([
 	{
 		path: "*",
@@ -24,6 +27,7 @@ export const router = createBrowserRouter([
 			{
 				index: true,
 				element: <HomeGallery />,
+				// element: <HomeGalleryInfinite />,
 			},
 			{
 				path: "profile/:userName",
@@ -41,11 +45,16 @@ export const router = createBrowserRouter([
 						path: "collections",
 						element: <Collections />,
 					},
+
 					{
 						path: "stats",
 						element: <Stats />,
 					},
 				],
+			},
+			{
+				path: "/profile/collections/:collectionId",
+				element: <CollectionPage />,
 			},
 		],
 	},
