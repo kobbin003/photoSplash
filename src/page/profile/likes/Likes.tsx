@@ -65,6 +65,7 @@ const Likes = () => {
 			setPage={setPage}
 			allPhotos={allLikedPhotos}
 			setAllPhotosPush={setAllLikedPhotosPush}
+			gotAllPhotos={gotAllLikes}
 		/>
 	);
 };

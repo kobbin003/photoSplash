@@ -62,6 +62,7 @@ const Photos = () => {
 			perPage={perPage}
 			allPhotos={allUploadedPhotos}
 			setAllPhotosPush={setAllUploadedPhotosPush}
+			gotAllPhotos={gotAllPhotos}
 		/>
 	);
 };
