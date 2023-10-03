@@ -3,7 +3,6 @@
 	display: flex;
 	gap: 2em;
 	padding: 0 1em;
-	/* background-color: royalblue; */
 	border-bottom: 1px solid #d3d3d3;
 	font-size: 18px;
 	> a {
@@ -12,19 +11,43 @@
 		align-items: center;
 		text-decoration: none;
 		color: #767676;
-		/* background-color: bisque; */
 		height: 3em;
-		gap: 1em;
-		> img {
+		gap: 0.3em;
+		> div {
+			display: none;
 			height: 40%;
 			width: auto;
+			> img {
+				height: 100%;
+				width: auto;
+			}
+		}
+		> span:nth-of-type(2) {
+			display: none;
+		}
+	}
+	@media (min-width: 776px) {
+		> a {
+			> div {
+				display: block;
+				height: 40%;
+				width: auto;
+				> img {
+					height: 100%;
+					width: auto;
+				}
+			}
+			> span:nth-of-type(2) {
+				display: block;
+			}
 		}
 	}
 }
 
 .current {
-	border-bottom: 3px solid black;
+	border-bottom: 0.15em solid white;
+	filter: brightness(24%);
 }
 .transparentBorderbottom {
-	border-bottom: 3px solid transparent;
+	border-bottom: 0.15em solid transparent;
 }
