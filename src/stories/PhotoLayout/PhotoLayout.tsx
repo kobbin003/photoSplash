@@ -29,6 +29,7 @@ const PhotoLayout = ({ items, height, width }: PhotoLayout) => {
 						height={randomHeight}
 						key={item.id + index}
 						photoData={item}
+						photoId={item.id}
 					/>
 				);
 			})}

@@ -1,4 +1,4 @@
-import { Dispatch, useEffect, useRef, useState } from "react";
+import { Dispatch, useEffect, useRef } from "react";
 import PhotoLayoutGeneric from "../../stories/PhotoLayout/PhotoLayoutGeneric";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 import arraysHaveSameContent from "../../utils/arraysHaveSameContent";
@@ -6,15 +6,18 @@ import { conditionToShowErrorMessage } from "../../utils/conditionToShowErrorMes
 import { UserLikeedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserLikedPhotos";
 import { UserUploadedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserUploadedPhotos";
 import { CollectionPhoto } from "../../utils/queryFunctions/unsplashData/type/CollectionPhotos";
+import { SearchPhoto } from "../../utils/queryFunctions/unsplashData/type/SearchPhotos";
 
 type PhotoGalleryProp<T> = {
 	data: { photos: T[]; remainingLimit: string | null };
 	isLoading: boolean;
 	isError: boolean;
 	perPage: number;
+	// page: number;
 	gotAllPhotos?: boolean;
-	setPage: Dispatch<React.SetStateAction<number>>;
+	limitExceeded: boolean;
 	setLimitExceeded: Dispatch<React.SetStateAction<boolean>>;
+	setPage: Dispatch<React.SetStateAction<number>>;
 	allPhotos: T[] | null;
 	setAllPhotosPush: (fn: (prevData: T[]) => T[]) => void;
 };
@@ -25,24 +28,27 @@ const PhotoGallery = <
 		| UserLikeedPhoto
 		| UserUploadedPhoto
 		| CollectionPhoto
+		| SearchPhoto
 >({
 	data,
 	isLoading,
 	isError,
+	limitExceeded,
 	setLimitExceeded,
+	// page,
 	perPage,
 	setPage,
 	allPhotos,
 	setAllPhotosPush,
 	gotAllPhotos,
 }: PhotoGalleryProp<T>) => {
-	const [pageIncremented, setPageIncremented] = useState(false); // to increment page one at a time
-
 	const photoLayoutRef = useRef<HTMLDivElement>(null);
+
 	useEffect(() => {
 		if (
-			data?.remainingLimit &&
-			conditionToShowErrorMessage(data?.remainingLimit)
+			(data?.remainingLimit &&
+				conditionToShowErrorMessage(data?.remainingLimit)) ||
+			!data?.remainingLimit
 		) {
 			setLimitExceeded(true);
 		}
@@ -61,10 +67,8 @@ const PhotoGallery = <
 		}
 	}, [data]);
 
+	/** scroll event */
 	useEffect(() => {
-		// reset pageIncremented state
-		setPageIncremented(false);
-
 		// scroll listener
 		const scrollListener = () => {
 			// Get the viewport height
@@ -79,11 +83,13 @@ const PhotoGallery = <
 			const scrollThreshold = 200;
 
 			if (viewportHeight + scrollPosition > totalHeight - scrollThreshold) {
-				if (!pageIncremented && !gotAllPhotos) {
-					//* setPage only if dit not gol all photos,
-					//* otherwise, even though fetch will be disabled, the page will rerender
+				// console.log("got gotAllPhotos", gotAllPhotos);
+				/** setPageIncrement is not required,
+				 * because, after the data is fetched the scrollheight gets longer
+				 * and so the condition becomes falsy again. */
+				if (!gotAllPhotos) {
+					// console.log("not got gotAllPhotos", gotAllPhotos);
 					setPage((prev) => prev + perPage);
-					setPageIncremented(true);
 				}
 			}
 		};
@@ -94,46 +100,28 @@ const PhotoGallery = <
 		};
 	}, [gotAllPhotos]);
 
-	/** not required , useful for demo:
-	 * how to forward ref into a generic react component.
-	 */
-	// useEffect(() => {
-	// 	const options = {
-	// 		threshold: 1,
-	// 	};
-
-	// 	const observer = new IntersectionObserver(([entry]) => {
-	// 		console.log(entry.target);
-	// 	}, options);
-
-	// 	const target = photoLayoutRef.current as HTMLElement;
-
-	// 	observer.observe(target);
-	// }, []);
-
 	return (
 		<>
 			<>
-				{data.remainingLimit &&
-					conditionToShowErrorMessage(data.remainingLimit) && (
-						<p
-							style={{
-								position: "fixed",
-								top: `${window.innerHeight - 100}px`,
-								width: "100vw",
-								height: "100px",
-								backgroundColor: "red",
-								zIndex: "10",
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-						>
-							It is a demo project: The limit has exceeded
-						</p>
-					)}
+				{limitExceeded && (
+					<p
+						style={{
+							position: "fixed",
+							top: `${window.innerHeight - 100}px`,
+							width: "100vw",
+							height: "100px",
+							backgroundColor: "red",
+							zIndex: "10",
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						It is a demo project: The limit has exceeded
+					</p>
+				)}
 			</>
-			{/**after the first fetch i.e when "allPhotos is set
+			{/**after the first fetch i.e when "allPhotos is set",
 			 * set items as allPhotos, because we need it in <ModalContainer/>" */}
 			{allPhotos ? (
 				<PhotoLayoutGeneric<T>

@@ -1,28 +1,41 @@
 import { Link, useLocation } from "react-router-dom";
 import { usePhotoStore } from "../../store/store";
 import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
-import { Button } from "../button/Button";
 import "./photoCard.css";
 import { MouseEvent } from "react";
 import { UserUploadedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserUploadedPhotos";
 import { UserLikeedPhoto } from "../../utils/queryFunctions/unsplashData/type/UserLikedPhotos";
+import { CollectionPhoto } from "../../utils/queryFunctions/unsplashData/type/CollectionPhotos";
+import HeartButton from "./HeartButton/HeartButton";
+import AddButton from "./AddButton/AddButton";
+import DownloadButton from "./downloadButton/DownloadButton";
+import { SearchPhoto } from "../../utils/queryFunctions/unsplashData/type/SearchPhotos";
 
 interface PhotoCardProps<T> {
 	imgUrlXSmall: string;
 	imgUrlSmall: string;
 	imgUrlRegular: string;
+	imgUrlFull?: string;
 	height?: "tall" | "medium" | "normal" | "short";
 	photoData: T;
+	photoId: string;
 }
 
 export const PhotoCard = <
-	T extends EditorialPhotosType | UserLikeedPhoto | UserUploadedPhoto
+	T extends
+		| EditorialPhotosType
+		| UserLikeedPhoto
+		| UserUploadedPhoto
+		| CollectionPhoto
+		| SearchPhoto
 >({
 	imgUrlXSmall,
 	imgUrlSmall,
 	imgUrlRegular,
+	imgUrlFull,
 	height,
 	photoData,
+	photoId,
 	...props
 }: PhotoCardProps<T>) => {
 	const { setCurrentPhoto, setShowModal } = usePhotoStore();
@@ -42,6 +55,7 @@ export const PhotoCard = <
 	const handleClickLink = (e: MouseEvent<HTMLAnchorElement>) => {
 		e.stopPropagation();
 	};
+
 	return (
 		<div
 			className={`photoContainer photoContainer__${height}`}
@@ -62,15 +76,10 @@ export const PhotoCard = <
 			></div>
 			<div className="onHoverDisplay">
 				<div className="onHoverDisplay-top">
-					<Button
-						height={35}
-						mode="only-icons"
-						imgUrl="/src/stories/assets/PhotoCard/heart.svg"
-					/>
-					<Button
-						height={35}
-						mode="only-icons"
-						imgUrl="/src/stories/assets/PhotoCard/add.svg"
+					<HeartButton id={photoId} />
+					<AddButton
+						id={photoId}
+						photoUrl={imgUrlFull ? imgUrlFull : ""}
 					/>
 				</div>
 				<div className="onHoverDisplay-bottom">
@@ -93,11 +102,7 @@ export const PhotoCard = <
 							{photoData.user.name}
 						</Link>
 					</div>
-					<Button
-						height={35}
-						mode="only-icons"
-						imgUrl="/src/stories/assets/PhotoCard/downloadArrow.svg"
-					/>
+					<DownloadButton id={photoId} />
 				</div>
 			</div>
 		</div>

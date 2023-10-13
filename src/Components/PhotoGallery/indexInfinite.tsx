@@ -73,7 +73,7 @@ const PhotoGalleryInfinite = () => {
 			// Get the total height of the document
 			const totalHeight = document.documentElement.scrollHeight;
 
-			const scrollThreshold = 50;
+			const scrollThreshold = 150;
 			if (viewportHeight + scrollPosition > totalHeight - scrollThreshold) {
 				fetchNextPage();
 			}

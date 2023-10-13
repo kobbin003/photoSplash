@@ -4,7 +4,7 @@
 	overflow: hidden;
 }
 .photoContainer__normal {
-	/* grid-column: auto/span 1; */
+	/* auto: automatically starts from any empty area/span above. */
 	grid-row: auto/span 5;
 	/* border: 5px solid orange; */
 }
