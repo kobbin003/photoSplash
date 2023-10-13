@@ -14,7 +14,7 @@ const Search = ({}: Props) => {
 				searchQuery={searchQuery || ""}
 			/>
 			<h1>{searchQuery}</h1>
-			<Outlet />
+			<Outlet context={[searchQuery]} />
 		</div>
 	);
 };
