@@ -23,6 +23,7 @@ const CollectionModal = ({}: Props) => {
 	}, []);
 	return (
 		<div id="collection-modal-container">
+			<button id="collection-close_btn"></button>
 			<div
 				id="collection-modal-content"
 				ref={collectionModalContentRef}

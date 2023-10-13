@@ -1,20 +1,34 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import "./style.css";
 import { usePhotoStore } from "../../../../store/store";
+import { useQuery } from "@tanstack/react-query";
+import { ErrorUnsplash } from "../../../../utils/queryFunctions/unsplashData/getPhotoStats";
+import { createCollection } from "../../../../utils/queryFunctions/unsplashData/createCollection";
 
 type Props = {};
 
 const AddCollectionForm = ({}: Props) => {
-	const { setShowCollectionModal } = usePhotoStore();
+	const { setShowCollectionModal, accessToken } = usePhotoStore();
+
 	const [formData, setFormData] = useState<{
-		name: string;
-		desc: string;
+		title: string;
+		description: string;
 		private: boolean;
 	}>({
-		name: "",
-		desc: "",
+		title: "",
+		description: "",
 		private: false,
 	});
+
+	const [allowFetch, setAllowFetch] = useState(false);
+
+	const { data, error, isFetching } = useQuery<{ msg: string }, ErrorUnsplash>(
+		["createCollection", accessToken, formData],
+		createCollection,
+		{ enabled: allowFetch }
+	);
+
+	console.log("query data", data, error, isFetching);
 
 	const handleOnChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,14 +42,33 @@ const AddCollectionForm = ({}: Props) => {
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(formData);
+		// setFormData(form)
+		console.log("formData!", formData);
+		setAllowFetch(true);
 	};
+
 	const handleClickCancel = () => {
 		setShowCollectionModal({ show: false, img: { url: "" } });
 	};
 
+	if (data?.msg) {
+		setTimeout(() => {
+			setShowCollectionModal({ show: false, img: { url: "" } });
+		}, 1000);
+	}
+
+	useEffect(() => {
+		setFormData({
+			title: "",
+			description: "",
+			private: false,
+		});
+	}, []);
+
 	return (
 		<div id="allcollection-container">
+			{data?.msg && <p id="collection-alert">Collection created!</p>}
+			{isFetching && <p id="collection-alert">Loading...</p>}
 			<h2>Create new collection</h2>
 			<form
 				onSubmit={handleSubmit}
@@ -45,18 +78,18 @@ const AddCollectionForm = ({}: Props) => {
 				<input
 					type="text"
 					id="name"
-					name="name"
-					value={formData["name"]}
+					name="title"
+					value={formData["title"]}
 					onChange={handleOnChange}
 					maxLength={60}
 				/>
-				<label htmlFor="desc">Description(optional)</label>
+				<label htmlFor="description">Description(optional)</label>
 				<textarea
-					id="desc"
-					name="desc"
+					id="description"
+					name="description"
 					rows={4}
 					maxLength={250}
-					value={formData["desc"]}
+					value={formData["description"]}
 					onChange={handleOnChange}
 				></textarea>
 				<div id="collection-checkbox-div">

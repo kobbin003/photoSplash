@@ -13,16 +13,49 @@
 	position: relative;
 	display: flex;
 	background-color: white;
-	width: 75vw;
-	height: 90vh;
+	width: 100vw;
+	@media (min-width: 776px) {
+		width: 85vw;
+		height: 90vh;
+	}
+	@media (min-width: 990px) {
+		width: 75vw;
+		height: 90vh;
+	}
+	height: 100vh;
 	min-height: calc(390 / 16 * 1rem);
 	> div:nth-of-type(1) {
 		position: inherit;
+		display: none;
 		height: 100%;
 		width: 42%;
+		flex: 0.8;
+		@media (min-width: 776px) {
+			display: block;
+		}
 		> img {
 			width: 100%;
 			height: 100%;
 		}
+	}
+}
+
+#collection-close_btn {
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	height: 1em;
+	width: 1em;
+	margin: 1em 1em;
+	background-color: transparent;
+	background-image: url("/src/assets/closeGreyer.svg");
+	&:hover {
+		scale: 1.1;
+	}
+	@media (min-width: 776px) {
+		background-image: url("/src/assets/close.svg");
+		left: 0;
+		background-color: transparent;
 	}
 }
