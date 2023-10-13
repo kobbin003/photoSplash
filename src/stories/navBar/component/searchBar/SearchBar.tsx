@@ -1,11 +1,13 @@
-import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import "./searchbar.css";
+import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
 	const [clearButtonVisibility, setClearButtonVisibility] = useState<
 		"visible" | "hidden"
 	>("hidden");
 	const [searchValue, setSearchValue] = useState("");
 	const searchInput = useRef<HTMLInputElement>(null);
+	const navigate = useNavigate();
 	const [containerBackgroundColor, setContainerBackgroundColor] =
 		useState("#eeeeee");
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,12 +22,18 @@ const SearchBar = () => {
 			setClearButtonVisibility("hidden");
 		}
 	};
-	const handleReset = (e: MouseEvent<HTMLButtonElement>) => {
+	const handleReset = () => {
 		setSearchValue("");
 		setClearButtonVisibility("hidden");
 		// keep focus on input even after resetting
 		if (searchInput.current) {
 			searchInput.current.focus();
+		}
+	};
+
+	const handleKeyEnterDown = (e: KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter") {
+			navigate("/search/hi/photos");
 		}
 	};
 	// DEBOUNCING:
@@ -57,6 +65,7 @@ const SearchBar = () => {
 				onBlur={() => {
 					setContainerBackgroundColor("#eeeeee");
 				}}
+				onKeyDown={handleKeyEnterDown}
 				value={searchValue}
 			/>
 			<button onClick={handleReset}>
