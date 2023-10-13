@@ -13,7 +13,7 @@ export const getSearchPhotos = async ({ queryKey }: any) => {
 		}
 		const remainingLimit = response.headers.get("X-Ratelimit-Remaining");
 		const photos: SearchPhotos = await response.json();
-		return { photos, remainingLimit };
+		return { photos: photos.results, remainingLimit, photoCount: photos.total };
 	} catch (error) {
 		throw error;
 	}
