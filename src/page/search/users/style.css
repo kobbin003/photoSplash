@@ -1,0 +1,21 @@
+#userSearch_container {
+	position: relative;
+	top: 110px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: 12em;
+	gap: 2em;
+	padding: 0 1em;
+}
+@media (max-width: 776px) {
+	#userSearch_container {
+		grid-template-columns: repeat(1, 1fr);
+		grid-auto-rows: 15em;
+	}
+}
+@media (min-width: 776px) and (max-width: 990px) {
+	#userSearch_container {
+		grid-template-columns: repeat(2, 1fr);
+		grid-auto-rows: 15em;
+	}
+}

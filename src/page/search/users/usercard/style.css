@@ -1,0 +1,75 @@
+#usercard-container {
+	border: 1px solid #cfcfcf;
+	border-radius: 5px;
+	position: relative;
+	/* background-color: chartreuse; */
+	text-decoration: none;
+	color: #767676;
+	padding: 1em;
+	padding-bottom: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	gap: 0.6em;
+	&:hover {
+		border: 1px solid black;
+	}
+}
+
+#usercard-head {
+	display: flex;
+	height: 33%;
+	justify-content: flex-start;
+	align-items: center;
+	/* background-color: darkmagenta; */
+	> div:nth-of-type(1) {
+		height: 100%;
+		> img {
+			height: 100%;
+			border-radius: 50%;
+		}
+	}
+	> div:nth-of-type(2) {
+		padding-left: 0.9em;
+		> b {
+			color: black;
+		}
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+	}
+}
+
+#usercard-pics {
+	height: 39%;
+	width: 100%;
+	/* background-color: aqua; */
+	display: flex;
+	justify-content: space-between;
+	> div {
+		/* background-color: palevioletred; */
+		height: 100%;
+		width: 32%;
+		> img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+#usercard-button {
+	/* background-color: red; */
+	/* height: 10%; */
+	> button {
+		width: 100%;
+		padding: 0.5em;
+		background-color: transparent;
+		border: 1px solid #d3d3d3;
+		color: #767676;
+		&:hover {
+			border: 1px solid black;
+		}
+	}
+}

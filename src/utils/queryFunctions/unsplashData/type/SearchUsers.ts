@@ -1,10 +1,10 @@
 export interface SearchUsers {
 	total: number;
 	total_pages: number;
-	results: Result[];
+	results: SearchUser[];
 }
 
-export interface Result {
+export interface SearchUser {
 	id: string;
 	username: string;
 	name: string;
