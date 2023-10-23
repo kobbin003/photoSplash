@@ -2,6 +2,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import "./style.css";
 import { FC, MouseEvent, useEffect, useState } from "react";
 import { capitalizeString } from "../../../utils/capitalizeString";
+import { usePhotoStore } from "../../../store/store";
 
 type Props = {
 	photosCount: number;
@@ -17,7 +18,8 @@ const ProfileUserPhotoNav: FC<Props> = ({
 	loggedIn,
 }) => {
 	const { userName } = useParams();
-
+	const { currentUserProfile } = usePhotoStore();
+	const showStats = userName == currentUserProfile?.username;
 	const { state, pathname } = useLocation();
 
 	const pathSplitted = pathname.split("/");
@@ -105,7 +107,7 @@ const ProfileUserPhotoNav: FC<Props> = ({
 				<span>Collections</span>
 				<span>{collectionsCount || 0}</span>
 			</Link>
-			{!userName && (
+			{showStats && (
 				<Link
 					to={"/me/profile/stats"}
 					onClick={handleSetBorderBottom}
