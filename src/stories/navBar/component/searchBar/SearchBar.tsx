@@ -33,7 +33,7 @@ const SearchBar = () => {
 
 	const handleKeyEnterDown = (e: KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === "Enter") {
-			navigate("/search/hi/photos");
+			navigate(`/search/${searchValue}/photos`);
 		}
 	};
 	// DEBOUNCING:

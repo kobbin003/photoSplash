@@ -39,8 +39,7 @@ const PhotoLayoutGeneric = <
 			style={{
 				height: `${height}`,
 				width: `${width}`,
-				// top: "10px",
-				top: isInProfileRoute ? "50px" : "110px",
+				top: isInProfileRoute ? "60px" : "120px",
 			}}
 			ref={ref}
 		>

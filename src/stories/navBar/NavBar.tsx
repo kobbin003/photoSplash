@@ -6,23 +6,25 @@ import ProfileButton from "./component/profileButton/ProfileButton";
 import FilterBar from "../filterBar/FilterBar";
 import { topics } from "../filterBar/topicsList";
 import SearchBar from "./component/searchBar/SearchBar";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 interface NavbarProps {
 	mode: "loggedIn" | "loggedOut";
 	children?: ReactNode;
-	filterbar?: boolean;
 }
-const NavBar = ({ mode, filterbar }: NavbarProps) => {
+const NavBar = ({ mode }: NavbarProps) => {
+	const { pathname } = useLocation();
+	const isAtProfileRoute = pathname.includes("profile");
+	const isAtSearchRoute = pathname.includes("search");
 	const handleClickAuthorise = () => {
 		const url = authorise();
-		// console.log(url);
 		window.location.href = url;
 	};
+
 	return (
 		<div id="container">
 			<div className="navbar__container">
 				<Link
-					to={"/me"}
+					to={mode == "loggedOut" ? "/" : "/me"}
 					id="logo__container"
 				>
 					<img
@@ -44,7 +46,7 @@ const NavBar = ({ mode, filterbar }: NavbarProps) => {
 					)}
 				</div>
 			</div>
-			{filterbar && <FilterBar topics={topics} />}
+			{!isAtProfileRoute && !isAtSearchRoute && <FilterBar topics={topics} />}
 		</div>
 	);
 };

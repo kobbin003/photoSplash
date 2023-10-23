@@ -6,7 +6,7 @@
 	display: flex;
 	justify-content: space-around;
 	flex: 1;
-	padding: 7px 10px;
+	padding: 10px;
 	padding-right: 15px;
 	> button {
 		background-color: transparent;
@@ -15,6 +15,8 @@
 	> button:hover {
 		color: black;
 	}
+	background-color: violet;
+	/* border: 1px solid red; */
 }
 #searchbar__container > img {
 	position: relative;
@@ -43,6 +45,6 @@
 }
 #searchbar::placeholder {
 	color: #767676;
-	font-size: 0.3rem;
+	font-size: 0.8rem;
 	position: relative;
 }
