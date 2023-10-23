@@ -6,9 +6,10 @@
 	width: 58%;
 	flex: 1;
 	width: 100%;
+	overflow: scroll;
 }
+
 .collection-button {
-	height: 18%;
 	width: 100%;
 	font-size: 1.2rem;
 	display: flex;
@@ -16,9 +17,105 @@
 	background-color: #f5f5f5;
 	color: #767676;
 	border: 2px dashed #d3d3d3;
-	padding-left: 1em;
+	padding: 1em;
 	margin: 1em 0;
 	&:hover {
 		background-color: rgb(237, 235, 235);
+	}
+}
+
+#collection-list__container {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+#collection-list__item {
+	/* height: 4em; */
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* height: 200px; */
+	padding: 1em;
+	border-radius: 5px;
+	cursor: pointer;
+	color: white;
+	> div:nth-of-type(1) {
+		display: flex;
+		flex-direction: column;
+		gap: 0.3em;
+		filter: brightness(110%);
+		> div:nth-of-type(1) {
+			font-size: 0.9rem;
+		}
+		> div:nth-of-type(2) {
+			font-size: 1.2rem;
+		}
+	}
+	> div:nth-of-type(2) {
+		filter: brightness(110%);
+		> button {
+			background-color: transparent;
+			/* background-color: tomato; */
+			width: 2em;
+			> img {
+				display: block;
+			}
+			> img:nth-of-type(1) {
+				height: 1em;
+				width: 1em;
+				display: none;
+			}
+			> img:nth-of-type(2) {
+				position: absolute;
+				height: 1em;
+				width: 1em;
+			}
+		}
+	}
+
+	&:hover {
+		> div {
+			filter: brightness(110%);
+		}
+		/* color: white; */
+		> div:nth-of-type(2) {
+			> button {
+				> img {
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+#collection-list__item::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.addedOnCollection {
+	&::before {
+		background-color: rgba(60, 179, 114, 0.576);
+		/* background-color: rgba(0, 128, 0, 0.437); */
+	}
+	&:hover::before {
+		/* background-color: rgba(0, 128, 0, 0.471); */
+		/* background-color: rgba(60, 179, 114, 0.682); */
+		filter: brightness(80%);
+	}
+}
+.notAddedOnCollection {
+	&::before {
+		background-color: #00000030;
+	}
+	&:hover::before {
+		background-color: #00000055;
 	}
 }

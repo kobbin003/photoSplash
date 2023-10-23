@@ -1,15 +1,43 @@
 import { Dispatch, MouseEvent, SetStateAction } from "react";
 import "./style.css";
+import { useQuery } from "@tanstack/react-query";
+import { UserCollections } from "../../../../utils/queryFunctions/unsplashData/type/UserCollections";
+import { ErrorUnsplash } from "../../../../utils/queryFunctions/unsplashData/getPhotoStats";
+import { getUserCollections } from "../../../../utils/queryFunctions/unsplashData/getUserCollections";
+import { usePhotoStore } from "../../../../store/store";
+import CollectionList from "./CollectionList";
 
 type Props = {
 	setShowForm: Dispatch<SetStateAction<boolean>>;
+	photoUrl: string;
 };
 
-const AddCollection = ({ setShowForm }: Props) => {
+const AddCollection = ({ setShowForm, photoUrl }: Props) => {
 	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		setShowForm(true);
 	};
+
+	const { currentUserProfile } = usePhotoStore();
+
+	const page = 1;
+
+	const perPage = currentUserProfile?.total_collections;
+
+	const userName = currentUserProfile?.username;
+
+	const { isFetching, data, error, isError } = useQuery<
+		{ collections: UserCollections; remainingLimit: string | null },
+		ErrorUnsplash
+	>(
+		["collectionModalcollections", page, perPage, userName],
+		getUserCollections,
+		{
+			keepPreviousData: true,
+			useErrorBoundary: false,
+			enabled: true, // pause it if limitExceeded
+		}
+	);
 
 	return (
 		<div id="allcollection-container">
@@ -20,6 +48,67 @@ const AddCollection = ({ setShowForm }: Props) => {
 			>
 				Create a new Collection
 			</button>
+			<div id="collection-list__container">
+				{isFetching ? (
+					<p>Loading...</p>
+				) : (
+					data &&
+					data.collections &&
+					data?.collections.map((coll) => (
+						<CollectionList
+							key={coll.id}
+							photoUrl={photoUrl}
+							coll={coll}
+						/>
+					))
+				)}
+				{/* {data &&
+					data.collections &&
+					data?.collections.map((coll) => (
+						<CollectionList
+							key={coll.id}
+							photoUrl={photoUrl}
+							coll={coll}
+						/>
+					))}
+
+				{data &&
+					data.collections &&
+					data?.collections.map((coll) => (
+						<CollectionList
+							key={coll.id}
+							photoUrl={photoUrl}
+							coll={coll}
+						/>
+					))}
+				{data &&
+					data.collections &&
+					data?.collections.map((coll) => (
+						<CollectionList
+							key={coll.id}
+							photoUrl={photoUrl}
+							coll={coll}
+						/>
+					))}
+				{data &&
+					data.collections &&
+					data?.collections.map((coll) => (
+						<CollectionList
+							key={coll.id}
+							photoUrl={photoUrl}
+							coll={coll}
+						/>
+					))}
+				{data &&
+					data.collections &&
+					data?.collections.map((coll) => (
+						<CollectionList
+							key={coll.id}
+							photoUrl={photoUrl}
+							coll={coll}
+						/>
+					))} */}
+			</div>
 		</div>
 	);
 };
