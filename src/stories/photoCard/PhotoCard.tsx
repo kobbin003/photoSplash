@@ -39,7 +39,7 @@ export const PhotoCard = <
 	...props
 }: PhotoCardProps<T>) => {
 	const { setCurrentPhoto, setShowModal } = usePhotoStore();
-
+	console.log(photoData);
 	const { pathname } = useLocation();
 
 	const profileLink = pathname.includes("me")
@@ -76,7 +76,10 @@ export const PhotoCard = <
 			></div>
 			<div className="onHoverDisplay">
 				<div className="onHoverDisplay-top">
-					<HeartButton id={photoId} />
+					<HeartButton
+						id={photoId}
+						likedByUser={photoData.liked_by_user}
+					/>
 					<AddButton
 						id={photoId}
 						photoUrl={imgUrlFull ? imgUrlFull : ""}

@@ -1,17 +1,27 @@
 import { MouseEvent } from "react";
 import { usePhotoStore } from "../../../store/store";
 import { Button } from "../../button/Button";
+import { useLocation } from "react-router-dom";
+import { authorise } from "../../../utils/authorise";
 
 type Props = {
 	id: string;
 	photoUrl: string;
 };
 
-const AddButton = ({ id, photoUrl }: Props) => {
+const AddButton = ({ photoUrl }: Props) => {
 	const { setShowCollectionModal } = usePhotoStore();
+	const { pathname } = useLocation();
+
+	const loggedIn = pathname.includes("me");
 	const handleClickShowModal = (e: MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
-		setShowCollectionModal({ show: true, img: { url: photoUrl } });
+		if (!loggedIn) {
+			const url = authorise();
+			window.location.href = url;
+		} else {
+			setShowCollectionModal({ show: true, img: { url: photoUrl } });
+		}
 	};
 	return (
 		<Button

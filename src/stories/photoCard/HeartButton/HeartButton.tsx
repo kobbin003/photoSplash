@@ -3,14 +3,20 @@ import { Button } from "../../button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { likeUnlikePhoto } from "../../../utils/queryFunctions/unsplashData/likeUnlikePhoto";
 import { usePhotoStore } from "../../../store/store";
+import { useLocation } from "react-router-dom";
+import { authorise } from "../../../utils/authorise";
 
 type Props = {
 	id: string;
+	likedByUser: boolean;
 };
 
-const HeartButton = ({ id }: Props) => {
+const HeartButton = ({ id, likedByUser }: Props) => {
 	const [heart, setheart] = useState(false);
 
+	const { pathname } = useLocation();
+
+	const loggedIn = pathname.includes("me");
 	const [method, setMethod] = useState("");
 
 	const { accessToken } = usePhotoStore();
@@ -22,13 +28,17 @@ const HeartButton = ({ id }: Props) => {
 
 	const handleClickHeart = (e: MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
-
-		setheart((prev) => !prev);
-
-		if (!method) {
-			setMethod("POST");
+		if (!loggedIn) {
+			const url = authorise();
+			window.location.href = url;
 		} else {
-			setMethod((prev) => (prev = "POST" ? "DELETE" : "POST"));
+			setheart((prev) => !prev);
+
+			if (!method) {
+				setMethod("POST");
+			} else {
+				setMethod((prev) => (prev = "POST" ? "DELETE" : "POST"));
+			}
 		}
 	};
 
@@ -36,9 +46,9 @@ const HeartButton = ({ id }: Props) => {
 		<Button
 			height={35}
 			mode="only-icons"
-			imgUrl="/src/stories/assets/PhotoCard/heart.svg"
+			imgUrl={"/src/stories/assets/PhotoCard/heart.svg"}
 			handleClick={handleClickHeart}
-			heart={heart ? "heart" : ""}
+			heart={heart || likedByUser ? "heart" : ""}
 		/>
 	);
 };
