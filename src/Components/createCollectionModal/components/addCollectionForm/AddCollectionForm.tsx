@@ -28,7 +28,7 @@ const AddCollectionForm = ({}: Props) => {
 		{ enabled: allowFetch }
 	);
 
-	console.log("query data", data, error, isFetching);
+	console.log("createCollection data", data, error, isFetching);
 
 	const handleOnChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -48,12 +48,18 @@ const AddCollectionForm = ({}: Props) => {
 	};
 
 	const handleClickCancel = () => {
-		setShowCollectionModal({ show: false, img: { url: "" } });
+		setShowCollectionModal({
+			show: false,
+			img: { url: "", collectionIds: [], id: "" },
+		});
 	};
 
 	if (data?.msg) {
 		setTimeout(() => {
-			setShowCollectionModal({ show: false, img: { url: "" } });
+			setShowCollectionModal({
+				show: false,
+				img: { url: "", collectionIds: [], id: "" },
+			});
 		}, 1000);
 	}
 

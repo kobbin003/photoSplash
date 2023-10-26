@@ -9,16 +9,21 @@ import CollectionList from "./CollectionList";
 
 type Props = {
 	setShowForm: Dispatch<SetStateAction<boolean>>;
-	photoUrl: string;
+	// photoUrl: string;
 };
 
-const AddCollection = ({ setShowForm, photoUrl }: Props) => {
+const AddCollection = ({ setShowForm }: Props) => {
 	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
 		e.stopPropagation();
 		setShowForm(true);
 	};
 
-	const { currentUserProfile } = usePhotoStore();
+	const {
+		currentUserProfile,
+		showCollectionModal: {
+			img: { url },
+		},
+	} = usePhotoStore();
 
 	const page = 1;
 
@@ -26,7 +31,7 @@ const AddCollection = ({ setShowForm, photoUrl }: Props) => {
 
 	const userName = currentUserProfile?.username;
 
-	const { isFetching, data, error, isError } = useQuery<
+	const { isFetching, data } = useQuery<
 		{ collections: UserCollections; remainingLimit: string | null },
 		ErrorUnsplash
 	>(
@@ -57,7 +62,7 @@ const AddCollection = ({ setShowForm, photoUrl }: Props) => {
 					data?.collections.map((coll) => (
 						<CollectionList
 							key={coll.id}
-							photoUrl={photoUrl}
+							photoUrl={url}
 							coll={coll}
 						/>
 					))

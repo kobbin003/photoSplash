@@ -4,23 +4,28 @@ import "./style.css";
 import { useClickedOut } from "../../hooks/useClickedOut";
 import AddCollection from "./components/addCollection/AddCollection";
 import AddCollectionForm from "./components/addCollectionForm/AddCollectionForm";
+
 type Props = {};
 
 const CollectionModal = ({}: Props) => {
 	const { setShowCollectionModal, showCollectionModal } = usePhotoStore();
 	const [showForm, setShowForm] = useState(false);
 	const collectionModalContentRef = useRef(null);
-	// useOutsideClickPropagate(() => {});
+
 	useClickedOut(collectionModalContentRef, () => {
-		setShowCollectionModal({ show: false, img: { url: "" } });
+		setShowCollectionModal({
+			show: false,
+			img: { url: "", id: "", collectionIds: [] },
+		});
 	});
-	console.log(showCollectionModal);
+
 	useEffect(() => {
 		document.body.style.overflow = "hidden";
 		return () => {
 			document.body.style.overflow = "scroll";
 		};
 	}, []);
+
 	return (
 		<div id="collection-modal-container">
 			<button id="collection-close_btn"></button>
