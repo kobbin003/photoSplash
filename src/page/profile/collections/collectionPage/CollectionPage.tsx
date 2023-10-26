@@ -29,7 +29,7 @@ const CollectionPage = ({}: Props) => {
 		: `/profile/${data?.user.username}`;
 	return (
 		<div id="collectionPage-container">
-			<div>
+			<div id="collectionPage-header">
 				<h1>{data?.title}</h1>
 				<div id="collectionPage-userprofile">
 					<Link to={profileLink}>

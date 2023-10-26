@@ -5,17 +5,25 @@
 	background-color: #eeeeee;
 	top: 50px;
 	padding-bottom: 50px;
-	> div:nth-of-type(1) {
-		height: 40vh;
-		display: flex;
-		gap: 1em;
-		flex-direction: column;
-		justify-content: flex-end;
+}
+#collectionPage-header {
+	/* background-color: violet; */
+	height: 40vh;
+	display: flex;
+	/* gap: 1em; */
+	flex-direction: column;
+	justify-content: flex-end;
+	> h1 {
+		position: relative;
+		/* background-color: springgreen; */
+	}
+	> p {
 		padding: 0 1em;
 	}
 }
-
 #collectionPage-userprofile {
+	padding: 0 1em;
+	/* background-color: slateblue; */
 	display: flex;
 	flex: 0.6;
 	align-items: flex-start;
