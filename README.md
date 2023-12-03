@@ -1,1 +1,1 @@
-# This app is a stock-photo platform, which I have created using the unsplash API & the design too is inspired by unsplash & instagram.
+# An Unsplash clone leveraging Unsplash's public API to replicate the platform's extensive collection of high-quality images. Explore a vast array of stunning visual content, search by category or keyword, and experience seamless integration with Unsplash's API for an authentic image discovery experience.
