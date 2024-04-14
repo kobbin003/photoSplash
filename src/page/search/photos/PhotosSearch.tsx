@@ -7,6 +7,7 @@ import { ErrorUnsplash } from "../../../utils/queryFunctions/unsplashData/getPho
 import { getSearchPhotos } from "../../../utils/queryFunctions/unsplashData/getSearchPhotos";
 import { useSearchPhotosStore } from "../../../store/searchPhotoStore";
 import { useOutletContext } from "react-router-dom";
+
 type Props = {};
 
 const PhotosSearch = ({}: Props) => {
@@ -38,7 +39,7 @@ const PhotosSearch = ({}: Props) => {
 	});
 
 	useEffect(() => {
-		console.log("photos-remaining-limit", data?.remainingLimit);
+		console.log("photos-remaining-limit", data?.remainingLimit, data);
 	}, [data]);
 
 	/** start with a clean slate or else there will be duplication of data */
@@ -60,8 +61,8 @@ const PhotosSearch = ({}: Props) => {
 	}
 
 	if (isError) {
-		console.log("client", error);
-		return <span>Error</span>;
+		console.log("client", error.errors);
+		return <span style={{ top: "120px" }}>Error</span>;
 	}
 	return (
 		<PhotoGallery<SearchPhoto>

@@ -11,6 +11,9 @@
 
 #collection-modal-content {
 	position: relative;
+	/* margin: 0 auto; */
+	bottom: 0px;
+	background-color: aqua;
 	display: flex;
 	background-color: white;
 	width: 100vw;

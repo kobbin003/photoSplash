@@ -2,8 +2,7 @@ import { useRouteError } from "react-router-dom";
 
 function ErrorBoundary() {
 	let error = useRouteError() as Error;
-	console.error("errorBoundary");
-	// Uncaught ReferenceError: path is not defined
+	console.error("errorBoundary", error);
 	return (
 		<div>
 			<h3>Hol Up! Wait a minute! something ain't right!</h3>

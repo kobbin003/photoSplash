@@ -100,7 +100,7 @@ const LeftOfModal: ForwardRefRenderFunction<
 				/>
 				{disablePrevButton && infoHovered && (
 					<div className="info info_left">
-						<p>you are at the start</p>
+						<p>you are at first item</p>
 					</div>
 				)}
 			</button>

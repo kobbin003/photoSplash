@@ -7,7 +7,10 @@ interface PhotoDisplayProps {
 }
 const PhotoDisplay: React.FC<PhotoDisplayProps> = ({ photoUrls }) => {
 	const context = useContext(ZoomContext);
+	console.log("photo-display");
 	const handleClickZoom = () => {
+		console.log("zoom clicked");
+		// e.stopPropagation();
 		context?.setZoom((prev) => !prev);
 	};
 	return (

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const useOutsideClickPropagate = (callback: () => void) => {
-	const handleClick = (e: any) => {
+	const handleClick = () => {
 		/** do stopPropagation in the click event on the clicked element. */
 		callback();
 	};

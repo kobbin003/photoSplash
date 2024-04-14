@@ -7,6 +7,7 @@ export interface UserCollection {
 	published_at: string;
 	last_collected_at: string;
 	updated_at: string;
+	featured: boolean;
 	total_photos: number;
 	private: boolean;
 	share_key: string;
@@ -24,6 +25,8 @@ export interface CoverPhoto {
 	likes: number;
 	liked_by_user: boolean;
 	description: string;
+	created_at: string;
+
 	user: User;
 	urls: Urls;
 	links: Links2;
@@ -33,12 +36,16 @@ export interface User {
 	id: string;
 	username: string;
 	name: string;
-	portfolio_url: string;
 	bio: string;
 	location: string;
 	total_likes: number;
 	total_photos: number;
 	total_collections: number;
+	first_name: string;
+	last_name: string;
+	instagram_username: string;
+	twitter_username: string;
+	portfolio_url: string;
 	profile_image: ProfileImage;
 	links: Links;
 }

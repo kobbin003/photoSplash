@@ -37,9 +37,10 @@ export const getEditorialPhotos = async ({ queryKey }: any) => {
 	//* this way of destructuring is not suitable for queries that
 	//* caches the previous datas i.e has {keepPreviousData: true,}
 	let page = queryKey[1];
+	const perPage = queryKey[2];
 	try {
 		const response = await fetch(
-			`https://api.unsplash.com/photos/?client_id=${accessKey}&page=${page}&per_page=2`
+			`https://api.unsplash.com/photos/?client_id=${accessKey}&page=${page}&per_page=${perPage}`
 		);
 		if (!response.ok) {
 			const unsplashError = await response.json();
@@ -49,7 +50,7 @@ export const getEditorialPhotos = async ({ queryKey }: any) => {
 		// console.log("limit-2", response.headers.get("X-Ratelimit-Remaining"));
 		const remainingLimit = response.headers.get("X-Ratelimit-Remaining");
 		const photos: EditorialPhotosType[] = await response.json();
-
+		// console.log("editorial-photos", photos);
 		return { photos, remainingLimit };
 	} catch (error) {
 		console.log("fetch-error", error);

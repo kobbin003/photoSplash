@@ -1,10 +1,12 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import "./dropDownMenu.css";
+import { usePhotoStore } from "../../../../store/store";
 interface DropDownMenu {
 	showDropDownMenu: boolean;
 }
 const DropDownMenu: FC<DropDownMenu> = ({ showDropDownMenu }) => {
+	const { currentUserProfile } = usePhotoStore();
 	return (
 		<div
 			id="dropDownMenu"
@@ -17,7 +19,7 @@ const DropDownMenu: FC<DropDownMenu> = ({ showDropDownMenu }) => {
 			<ul>
 				<li>
 					<Link
-						to={"/me/profile"}
+						to={`/me/profile/${currentUserProfile?.username}`}
 						state={{ show: "Photos" }}
 					>
 						View Profile
@@ -25,7 +27,7 @@ const DropDownMenu: FC<DropDownMenu> = ({ showDropDownMenu }) => {
 				</li>
 				<li>
 					<Link
-						to={"/me/profile/stats"}
+						to={`/me/profile/${currentUserProfile?.username}/stats`}
 						state={{ show: "Stats" }}
 					>
 						Stats
@@ -34,7 +36,7 @@ const DropDownMenu: FC<DropDownMenu> = ({ showDropDownMenu }) => {
 			</ul>
 			<ul>
 				<li>
-					<Link to={"/"}>Logout "username"</Link>
+					<Link to={"/"}>Logout {currentUserProfile?.username}</Link>
 				</li>
 			</ul>
 		</div>

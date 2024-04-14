@@ -1,7 +1,7 @@
 //* set {queryKey} type as "any".
 export const getAuthToken = async ({ queryKey }: any) => {
 	const [code, ..._] = queryKey.reverse();
-	console.log("getAuthToken", code);
+	// console.log("getAuthToken", code);
 	try {
 		const redirect_uri = "http://localhost:5173/callback";
 		const accessKey = import.meta.env.VITE_ACCESS_KEY;

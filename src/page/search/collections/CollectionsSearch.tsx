@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
 import "./style.css";
 import { useOutletContext } from "react-router-dom";
-import { useSearchPhotosStore } from "../../../store/searchPhotoStore";
 import { useSearchCollectionsStore } from "../../../store/searchCollectionStore";
 import { useQuery } from "@tanstack/react-query";
 import { getSearchCollections } from "../../../utils/queryFunctions/unsplashData/getSearchCollections";
 import { ErrorUnsplash } from "../../../utils/queryFunctions/unsplashData/getPhotoStats";
-import {
-	SearchCollection,
-	SearchCollections,
-} from "../../../utils/queryFunctions/unsplashData/type/SearchCollections";
+import { SearchCollection } from "../../../utils/queryFunctions/unsplashData/type/SearchCollections";
 import CollectionGallery from "../../profile/collections/CollectionGallery";
+
 type Props = {};
 
 const CollectionsSearch = ({}: Props) => {
-	const perPage = 2;
+	const perPage = 6;
 
 	const [page, setPage] = useState<number>(1);
 
@@ -36,14 +33,14 @@ const CollectionsSearch = ({}: Props) => {
 			collectionsCount: number;
 		},
 		ErrorUnsplash
-	>(["usercollection", query, page, perPage], getSearchCollections, {
+	>(["search-collections", query, page, perPage], getSearchCollections, {
 		keepPreviousData: true,
 		useErrorBoundary: false,
 		enabled: limitExceeded ? false : gotAllCollections ? false : true, // pause it if limitExceeded
 	});
 
 	useEffect(() => {
-		console.log("collections-remaining-limit", data);
+		console.log("search-collections-remaining-limit", data?.remainingLimit);
 	}, [data]);
 
 	/** disable fetch if all collections are fetched */
@@ -65,8 +62,10 @@ const CollectionsSearch = ({}: Props) => {
 
 	if (isLoading) return <p>Loading...</p>;
 
-	if (error) return <p>Error:{error.errors}</p>;
-
+	if (isError) {
+		console.log("client", error);
+		return <span style={{ top: "120px" }}>Error</span>;
+	}
 	return (
 		<CollectionGallery
 			data={data}

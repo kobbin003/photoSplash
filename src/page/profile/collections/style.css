@@ -1,3 +1,9 @@
 #collectionsContainer {
+	position: relative;
 	padding: 1em;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: 60vh;
+	gap: 2em;
+	/* background-color: darkgoldenrod; */
 }

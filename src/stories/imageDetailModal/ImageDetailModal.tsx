@@ -4,6 +4,7 @@ import { usePhotoStore } from "../../store/store";
 import Header from "./components/header/Header";
 import PhotoDisplay from "./components/photoDisplay/PhotoDisplay";
 import PhotoStats from "./components/photoStats/PhotoStats";
+import { EditorialPhotosType } from "../../utils/queryFunctions/unsplashData/type/EditorialPhotos";
 interface ImageDetailModalArgs {}
 
 const ImageDetailModal: ForwardRefRenderFunction<
@@ -11,20 +12,19 @@ const ImageDetailModal: ForwardRefRenderFunction<
 	ImageDetailModalArgs
 > = (_, ref) => {
 	const { currentPhoto } = usePhotoStore();
+
 	if (!currentPhoto) {
 		console.log("some error");
 		return <div>Loading..</div>;
 	}
+	const photo = currentPhoto as EditorialPhotosType;
 
 	return (
 		<>
-			<div
-				id="modalContent"
-				ref={ref}
-			>
-				<Header currentPhoto={currentPhoto} />
-				<PhotoDisplay photoUrls={currentPhoto.urls} />
-				<PhotoStats photoId={currentPhoto.id} />
+			<div id="modalContent" ref={ref}>
+				<Header currentPhoto={photo} />
+				<PhotoDisplay photoUrls={photo.urls} />
+				<PhotoStats photoId={photo.id} />
 			</div>
 		</>
 	);

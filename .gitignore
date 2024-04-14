@@ -28,3 +28,4 @@ src/stories/containerImages
 src/stories/Layout
 src/stories/modalImage
 src/stories/userProfile
+*.txt

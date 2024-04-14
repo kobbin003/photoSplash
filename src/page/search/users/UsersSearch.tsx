@@ -57,7 +57,10 @@ const UsersSearch = ({}: Props) => {
 	console.log(data, allSearchUsers);
 	if (isLoading) return <p>Loading...</p>;
 
-	if (error) return <p>Error:{error.errors}</p>;
+	if (isError) {
+		console.log("client", error);
+		return <span style={{ top: "120px" }}>Error</span>;
+	}
 
 	return (
 		<UsersGallery

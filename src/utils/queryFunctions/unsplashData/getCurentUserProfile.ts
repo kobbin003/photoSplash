@@ -1,30 +1,32 @@
-import { accessKey } from "./key/accessKey";
 import { CurrentUserProfile } from "./type/CurrentUserProfile";
 
 const getCurrentUserProfile = async ({ queryKey }: any) => {
-	// const userProfilePathEnd = queryKey[1];
 	const [_, accessToken] = queryKey;
-	console.log(queryKey, accessToken);
-	// const accessToken = localStorage.getItem("tokenUnsplash");
-	console.log("hii");
 	try {
 		const option = {
 			headers: { Authorization: `Bearer ${accessToken}` },
 		};
-		const url = `https://api.unsplash.com/me?client_id=${accessKey}`;
+		const url = `https://api.unsplash.com/me`;
 		const response = await fetch(url, option);
-		// if (!response.ok) {
-		// 	const unsplashError = await response.json();
-		// 	return unsplashError;
-		// }
+		if (!response.ok) {
+			const unsplashError = await response.json();
+			console.log("unsplashError", unsplashError);
+			throw unsplashError;
+		}
 		const data: CurrentUserProfile = await response.json();
 		return data;
 	} catch (error) {
-		//!!! there is difference between these two returns
-		//!!! only returning error, gives error on useQuery
-		//!!! find out why????
-		// return error;
+		console.log("err....", error);
+		/** errors that are thrown in an async function are automatically converted into rejected Promises */
+		// throw error;
+
+		//OR
+
+		/** throw error & Promise.reject(error) does the same function */
 		return Promise.reject(error);
+
+		/** do not return error because, the error will be propagated as resolved promise */
+		// return error
 	}
 };
 export default getCurrentUserProfile;

@@ -1,14 +1,26 @@
-import { Outlet } from "react-router-dom";
-import "./App.css";
-import PhotoGallery from "./Components/PhotoGallery";
-import ModalContainer from "./Components/ModalContainer";
+// import "./App.css";
 
 function App() {
+	const throwError = () => {
+		console.log("about to throw error");
+		throw new Error("Home gallery error");
+	};
 	return (
-		<div className="appContainer">
-			<Outlet />
-			<ModalContainer />
-			<PhotoGallery />
+		<div>
+			<h1>HI</h1>
+			<button
+				onClick={throwError}
+				style={{
+					height: "100px",
+					width: "100px",
+					position: "relative",
+					top: "100px",
+					zIndex: "15",
+					backgroundColor: "black",
+				}}
+			>
+				Throw Error
+			</button>
 		</div>
 	);
 }

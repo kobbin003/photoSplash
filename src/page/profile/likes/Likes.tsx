@@ -16,7 +16,9 @@ const Likes = () => {
 	const [page, setPage] = useState<number>(1);
 
 	const [limitExceeded, setLimitExceeded] = useState(false);
+
 	const [gotAllLikes, setGotAllLikes] = useState(false);
+
 	const [username, , likesCount]: string[] = useOutletContext();
 
 	const { allLikedPhotos, setAllLikedPhotosPush, setAllLikedPhotos } =
@@ -28,8 +30,13 @@ const Likes = () => {
 	>(["userLikedPhotos", page, perPage, username], getUserLikedPhotos, {
 		keepPreviousData: true,
 		useErrorBoundary: false,
+		// enabled: limitExceeded ? false : true, // pause it if limitExceeded
 		enabled: limitExceeded ? false : gotAllLikes ? false : true, // pause it if limitExceeded
 	});
+
+	useEffect(() => {
+		console.log("likes-remaining-limit", data);
+	}, [data]);
 
 	/** start with a clean slate or else there will be duplication of data */
 	useEffect(() => {
@@ -38,14 +45,10 @@ const Likes = () => {
 
 	/** disable fetch if all liked photos are fetched */
 	useEffect(() => {
-		if (Number(likesCount) == allLikedPhotos?.length) {
+		if (likesCount && Number(likesCount) == allLikedPhotos?.length) {
 			setGotAllLikes(true);
 		}
 	}, [allLikedPhotos]);
-
-	if (data) {
-		console.log("Likes", data);
-	}
 
 	if (isLoading) {
 		return <span>Loading...</span>;
@@ -60,6 +63,7 @@ const Likes = () => {
 			data={data}
 			isError={isError}
 			isLoading={isLoading}
+			limitExceeded={limitExceeded}
 			setLimitExceeded={setLimitExceeded}
 			perPage={perPage}
 			setPage={setPage}

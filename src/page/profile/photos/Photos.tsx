@@ -12,12 +12,14 @@ import { getUserUploadedPhotos } from "../../../utils/queryFunctions/unsplashDat
 import PhotoGallery from "../../../Components/PhotoGallery";
 
 const Photos = () => {
-	const perPage = 2;
+	const perPage = 15;
 
 	const [page, setPage] = useState<number>(1);
 
 	const [limitExceeded, setLimitExceeded] = useState(false);
+
 	const [gotAllPhotos, setGotAllPhotos] = useState(false);
+
 	const [username, photosCount, ..._]: string[] = useOutletContext();
 
 	const { allUploadedPhotos, setAllUploadedPhotosPush, setAllUploadedPhotos } =
@@ -29,8 +31,13 @@ const Photos = () => {
 	>(["userUploadedPhotos", page, perPage, username], getUserUploadedPhotos, {
 		keepPreviousData: true,
 		useErrorBoundary: false,
+		// enabled: limitExceeded ? false : true, // pause it if limitExceeded
 		enabled: limitExceeded ? false : gotAllPhotos ? false : true, // pause it if limitExceeded
 	});
+
+	useEffect(() => {
+		console.log("photos-remaining-limit", data?.remainingLimit);
+	}, [data]);
 
 	/** start with a clean slate or else there will be duplication of data */
 	useEffect(() => {
@@ -39,7 +46,9 @@ const Photos = () => {
 
 	/** disable fetch if all uploaded photos are fetched */
 	useEffect(() => {
-		if (Number(photosCount) == allUploadedPhotos?.length) {
+		console.log("NOT-equal", photosCount, allUploadedPhotos?.length);
+		if (photosCount && Number(photosCount) == allUploadedPhotos?.length) {
+			console.log("equal", photosCount, allUploadedPhotos?.length);
 			setGotAllPhotos(true);
 		}
 	}, [allUploadedPhotos]);
@@ -54,9 +63,11 @@ const Photos = () => {
 	}
 	return (
 		<PhotoGallery<UserUploadedPhoto>
+			key={"profile/photos"}
 			data={data}
 			isError={isError}
 			isLoading={isLoading}
+			limitExceeded={limitExceeded}
 			setLimitExceeded={setLimitExceeded}
 			setPage={setPage}
 			perPage={perPage}

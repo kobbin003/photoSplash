@@ -39,9 +39,11 @@ export const PhotoCard = <
 	...props
 }: PhotoCardProps<T>) => {
 	const { setCurrentPhoto, setShowModal } = usePhotoStore();
-	console.log(photoData);
+	// console.log("current user collection", photoData);
 	const { pathname } = useLocation();
-
+	const collectionIds = photoData.current_user_collections.map(
+		(coll) => coll.id
+	);
 	const profileLink = pathname.includes("me")
 		? `/me/profile/${photoData.user.username}`
 		: `/profile/${photoData.user.username}`;
@@ -83,6 +85,7 @@ export const PhotoCard = <
 					<AddButton
 						id={photoId}
 						photoUrl={imgUrlFull ? imgUrlFull : ""}
+						collectionIds={collectionIds}
 					/>
 				</div>
 				<div className="onHoverDisplay-bottom">

@@ -12,8 +12,12 @@ export const getSearchCollections = async ({ queryKey }: any) => {
 			throw unsplashError;
 		}
 		const remainingLimit = response.headers.get("X-Ratelimit-Remaining");
-		const photos: SearchCollections = await response.json();
-		return { photos, remainingLimit };
+		const collections: SearchCollections = await response.json();
+		return {
+			collections: collections.results,
+			remainingLimit,
+			collectionsCount: collections.total,
+		};
 	} catch (error) {
 		throw error;
 	}

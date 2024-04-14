@@ -2,10 +2,10 @@ import { accessKey } from "./key/accessKey";
 import { UserCollections } from "./type/UserCollections";
 
 export const getUserCollections = async ({ queryKey }: any) => {
-	const page = queryKey[1];
-	const username = queryKey[2];
+	console.log("get user collections called");
+	const [_, page, perPage, username] = queryKey;
 	try {
-		const url = `https://api.unsplash.com/users/${username}/collections?client_id=${accessKey}&page=${page}&per_page=2`;
+		const url = `https://api.unsplash.com/users/${username}/collections?client_id=${accessKey}&page=${page}&per_page=${perPage}`;
 
 		const response = await fetch(url);
 

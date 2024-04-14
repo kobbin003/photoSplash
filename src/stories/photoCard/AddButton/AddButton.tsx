@@ -7,9 +7,10 @@ import { authorise } from "../../../utils/authorise";
 type Props = {
 	id: string;
 	photoUrl: string;
+	collectionIds: number[] | [];
 };
 
-const AddButton = ({ photoUrl }: Props) => {
+const AddButton = ({ photoUrl, id, collectionIds }: Props) => {
 	const { setShowCollectionModal } = usePhotoStore();
 	const { pathname } = useLocation();
 
@@ -20,7 +21,10 @@ const AddButton = ({ photoUrl }: Props) => {
 			const url = authorise();
 			window.location.href = url;
 		} else {
-			setShowCollectionModal({ show: true, img: { url: photoUrl } });
+			setShowCollectionModal({
+				show: true,
+				img: { url: photoUrl, id, collectionIds },
+			});
 		}
 	};
 	return (

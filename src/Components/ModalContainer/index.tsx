@@ -45,9 +45,9 @@ const ModalContainer = () => {
 
 	/** using useClickedOutsideRef */
 	const reffs = [imageDetailModalRef, prevButtonRef, nextButtonRef];
-	useClickedOutsideRef(reffs, () => {
-		setShowModal(false);
-	});
+	// useClickedOutsideRef(reffs, () => {
+	// 	setShowModal(false);
+	// });
 
 	/** using useClickedOutsideId */
 	// const ids = ["modalContent", "nav-btn_right", "nav-btn_left"];

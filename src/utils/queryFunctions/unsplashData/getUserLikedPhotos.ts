@@ -2,9 +2,9 @@ import { accessKey } from "./key/accessKey";
 import { UserLikeedPhotos } from "./type/UserLikedPhotos";
 
 export const getUserLikedPhotos = async ({ queryKey }: any) => {
-	const [_, page, username] = queryKey;
+	const [_, page, perPage, username] = queryKey;
 	try {
-		const url = `https://api.unsplash.com/users/${username}/likes?client_id=${accessKey}&page=${page}&per_page=2`;
+		const url = `https://api.unsplash.com/users/${username}/likes?client_id=${accessKey}&page=${page}&per_page=${perPage}`;
 		const response = await fetch(url);
 		if (!response.ok) {
 			const unsplashErrorData = await response.json();
