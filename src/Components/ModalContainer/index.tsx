@@ -44,10 +44,12 @@ const ModalContainer = () => {
 	const nextButtonRef = useRef<HTMLImageElement>(null);
 
 	/** using useClickedOutsideRef */
+	// don't close modal when clicked on these elements
 	const reffs = [imageDetailModalRef, prevButtonRef, nextButtonRef];
-	// useClickedOutsideRef(reffs, () => {
-	// 	setShowModal(false);
-	// });
+	// const reffs = [imageDetailModalRef, prevButtonRef, nextButtonRef];
+	useClickedOutsideRef(reffs, () => {
+		setShowModal(false);
+	});
 
 	/** using useClickedOutsideId */
 	// const ids = ["modalContent", "nav-btn_right", "nav-btn_left"];

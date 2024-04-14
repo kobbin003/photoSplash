@@ -14,7 +14,7 @@ export const useClickedOutsideId = (ids: string[], callback: () => void) => {
 					return false;
 				}
 			});
-			console.log(clickedOutside);
+			console.log("clickedOutside", clickedOutside);
 			if (clickedOutside) {
 				callback();
 			}
@@ -26,14 +26,18 @@ export const useClickedOutsideId = (ids: string[], callback: () => void) => {
 		}
 	}, []);
 };
+
 export const useClickedOutsideRef = (
 	refs: RefObject<HTMLElement>[],
 	callback: () => void
 ) => {
 	useEffect(() => {
 		const handleClick = (e: any) => {
+			// it is clicked outside if, the refs
+			// does not contain the element(e.target) clicked.
 			const clickedOutside = refs.every(
-				(ref) => ref.current && ref.current !== e.target
+				(ref) => ref.current && !ref.current.contains(e.target)
+				// (ref) => ref.current && ref.current !== e.target
 			);
 			if (clickedOutside) {
 				callback();

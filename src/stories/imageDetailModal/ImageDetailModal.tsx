@@ -17,6 +17,8 @@ const ImageDetailModal: ForwardRefRenderFunction<
 		console.log("some error");
 		return <div>Loading..</div>;
 	}
+
+	console.log("ref-passed", ref);
 	const photo = currentPhoto as EditorialPhotosType;
 
 	return (
